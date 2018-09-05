@@ -17,7 +17,22 @@ namespace Project_1
             InitializeComponent();
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void deltaTListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void yCoordTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void xCoordTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void drawingWindow_TextChanged(object sender, EventArgs e)
         {
 
         }
