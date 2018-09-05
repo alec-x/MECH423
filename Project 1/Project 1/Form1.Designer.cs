@@ -70,7 +70,7 @@
             this.listBox1.ItemHeight = 27;
             this.listBox1.Location = new System.Drawing.Point(12, 120);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(175, 382);
+            this.listBox1.Size = new System.Drawing.Size(175, 247);
             this.listBox1.TabIndex = 4;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
@@ -114,7 +114,7 @@
             this.textBox3.Multiline = true;
             this.textBox3.Name = "textBox3";
             this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(441, 490);
+            this.textBox3.Size = new System.Drawing.Size(330, 357);
             this.textBox3.TabIndex = 8;
             this.textBox3.Text = "Drawing Window";
             // 
@@ -122,7 +122,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(646, 519);
+            this.ClientSize = new System.Drawing.Size(535, 386);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -130,6 +130,7 @@
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
+            this.MinimumSize = new System.Drawing.Size(379, 298);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
