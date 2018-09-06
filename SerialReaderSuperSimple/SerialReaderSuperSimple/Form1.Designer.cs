@@ -126,6 +126,7 @@
             // Timer
             // 
             this.Timer.Enabled = true;
+            this.Timer.Tick += new System.EventHandler(this.Timer_Tick);
             // 
             // FormSerialReader
             // 
@@ -142,7 +143,7 @@
             this.Controls.Add(this.ListComPort);
             this.MinimumSize = new System.Drawing.Size(338, 222);
             this.Name = "FormSerialReader";
-            this.Text = "Form1";
+            this.Text = "Serial Reader";
             this.ResumeLayout(false);
             this.PerformLayout();
 

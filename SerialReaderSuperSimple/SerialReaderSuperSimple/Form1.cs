@@ -21,5 +21,15 @@ namespace SerialReaderSuperSimple
         {
 
         }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            ListComPort.Items.Clear();
+            string[] portNames = System.IO.Ports.SerialPort.GetPortNames().ToArray();
+            foreach(string name in portNames)
+            {
+                ListComPort.Items.Add(name);
+            }
+        }
     }
 }
