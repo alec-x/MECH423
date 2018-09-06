@@ -37,6 +37,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.drawingWindow = new System.Windows.Forms.TextBox();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.timerMoveDelayCounter = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // xCoordTextBox
@@ -121,6 +123,13 @@
             this.drawingWindow.TabIndex = 8;
             this.drawingWindow.Text = "Drawing Window";
             this.drawingWindow.TextChanged += new System.EventHandler(this.drawingWindow_TextChanged);
+            this.drawingWindow.MouseMove += new System.Windows.Forms.MouseEventHandler(this.drawingWindow_MouseMove);
+            // 
+            // timerMoveDelayCounter
+            // 
+            this.timerMoveDelayCounter.Enabled = true;
+            this.timerMoveDelayCounter.Interval = 50;
+            this.timerMoveDelayCounter.Tick += new System.EventHandler(this.timerMoveDelayCounter_Tick);
             // 
             // Form1
             // 
@@ -137,6 +146,7 @@
             this.MinimumSize = new System.Drawing.Size(379, 298);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -152,6 +162,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox drawingWindow;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Timer timerMoveDelayCounter;
     }
 }
 

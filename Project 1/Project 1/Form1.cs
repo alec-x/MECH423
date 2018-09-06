@@ -36,5 +36,21 @@ namespace Project_1
         {
 
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void drawingWindow_MouseMove(object sender, MouseEventArgs e)
+        {
+            xCoordTextBox.Text = e.X.ToString("0000");
+            yCoordTextBox.Text = e.Y.ToString("0000");
+        }
+
+        private void timerMoveDelayCounter_Tick(object sender, EventArgs e)
+        {
+
+        }
     }
 }
