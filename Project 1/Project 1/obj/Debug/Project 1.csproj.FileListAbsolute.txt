@@ -1,0 +1,10 @@
+C:\Repos\MECH423\Project 1\Project 1\bin\Debug\Project 1.exe.config
+C:\Repos\MECH423\Project 1\Project 1\bin\Debug\Project 1.exe
+C:\Repos\MECH423\Project 1\Project 1\bin\Debug\Project 1.pdb
+C:\Repos\MECH423\Project 1\Project 1\obj\Debug\Project 1.csprojAssemblyReference.cache
+C:\Repos\MECH423\Project 1\Project 1\obj\Debug\Project_1.formMainWindow.resources
+C:\Repos\MECH423\Project 1\Project 1\obj\Debug\Project_1.Properties.Resources.resources
+C:\Repos\MECH423\Project 1\Project 1\obj\Debug\Project 1.csproj.GenerateResource.cache
+C:\Repos\MECH423\Project 1\Project 1\obj\Debug\Project 1.csproj.CoreCompileInputs.cache
+C:\Repos\MECH423\Project 1\Project 1\obj\Debug\Project 1.exe
+C:\Repos\MECH423\Project 1\Project 1\obj\Debug\Project 1.pdb

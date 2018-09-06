@@ -10,9 +10,14 @@ using System.Windows.Forms;
 
 namespace Project_1
 {
-    public partial class Form1 : Form
+    public partial class formMainWindow : Form
     {
-        public Form1()
+        //class vars
+        int timeCounter;
+        int currentTime;
+        int itemLimit = 20;
+
+        public formMainWindow()
         {
             InitializeComponent();
         }
@@ -46,11 +51,23 @@ namespace Project_1
         {
             xCoordTextBox.Text = e.X.ToString("0000");
             yCoordTextBox.Text = e.Y.ToString("0000");
+
+            //calculate time delay between moves
+            currentTime = timeCounter * TimerMoveDelayCounter.Interval;
+            deltaTListBox.Items.Add(currentTime.ToString("000000"));
+            timeCounter = 0; //restart counter
+
+            while (deltaTListBox.Items.Count > itemLimit)
+            {
+                deltaTListBox.Items.RemoveAt(0);
+            }
+
+            deltaTListBox.SelectedIndex = deltaTListBox.Items.Count - 1;
         }
 
-        private void timerMoveDelayCounter_Tick(object sender, EventArgs e)
+        private void TimerMoveDelayCounter_Tick(object sender, EventArgs e)
         {
-
+            timeCounter++;
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Project_1
 {
-    partial class Form1
+    partial class formMainWindow
     {
         /// <summary>
         /// Required designer variable.
@@ -38,7 +38,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.drawingWindow = new System.Windows.Forms.TextBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.timerMoveDelayCounter = new System.Windows.Forms.Timer(this.components);
+            this.TimerMoveDelayCounter = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // xCoordTextBox
@@ -75,7 +75,6 @@
             this.deltaTListBox.Location = new System.Drawing.Point(12, 120);
             this.deltaTListBox.Name = "deltaTListBox";
             this.deltaTListBox.Size = new System.Drawing.Size(175, 247);
-            this.deltaTListBox.Sorted = true;
             this.deltaTListBox.TabIndex = 4;
             this.deltaTListBox.SelectedIndexChanged += new System.EventHandler(this.deltaTListBox_SelectedIndexChanged);
             // 
@@ -125,13 +124,13 @@
             this.drawingWindow.TextChanged += new System.EventHandler(this.drawingWindow_TextChanged);
             this.drawingWindow.MouseMove += new System.Windows.Forms.MouseEventHandler(this.drawingWindow_MouseMove);
             // 
-            // timerMoveDelayCounter
+            // TimerMoveDelayCounter
             // 
-            this.timerMoveDelayCounter.Enabled = true;
-            this.timerMoveDelayCounter.Interval = 50;
-            this.timerMoveDelayCounter.Tick += new System.EventHandler(this.timerMoveDelayCounter_Tick);
+            this.TimerMoveDelayCounter.Enabled = true;
+            this.TimerMoveDelayCounter.Interval = 50;
+            this.TimerMoveDelayCounter.Tick += new System.EventHandler(this.TimerMoveDelayCounter_Tick);
             // 
-            // Form1
+            // formMainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -144,7 +143,7 @@
             this.Controls.Add(this.yCoordTextBox);
             this.Controls.Add(this.xCoordTextBox);
             this.MinimumSize = new System.Drawing.Size(379, 298);
-            this.Name = "Form1";
+            this.Name = "formMainWindow";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
@@ -163,7 +162,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox drawingWindow;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private System.Windows.Forms.Timer timerMoveDelayCounter;
+        private System.Windows.Forms.Timer TimerMoveDelayCounter;
     }
 }
 
