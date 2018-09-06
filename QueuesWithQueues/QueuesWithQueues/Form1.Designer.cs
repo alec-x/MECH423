@@ -47,9 +47,9 @@
             // ButtonAddToQueue
             // 
             this.ButtonAddToQueue.Font = new System.Drawing.Font("Consolas", 11.8F);
-            this.ButtonAddToQueue.Location = new System.Drawing.Point(12, 12);
+            this.ButtonAddToQueue.Location = new System.Drawing.Point(12, 6);
             this.ButtonAddToQueue.Name = "ButtonAddToQueue";
-            this.ButtonAddToQueue.Size = new System.Drawing.Size(205, 30);
+            this.ButtonAddToQueue.Size = new System.Drawing.Size(205, 38);
             this.ButtonAddToQueue.TabIndex = 0;
             this.ButtonAddToQueue.Text = "Add to Queue";
             this.ButtonAddToQueue.UseVisualStyleBackColor = true;
@@ -58,9 +58,9 @@
             // ButtonGetFromQueue
             // 
             this.ButtonGetFromQueue.Font = new System.Drawing.Font("Consolas", 11.8F);
-            this.ButtonGetFromQueue.Location = new System.Drawing.Point(12, 51);
+            this.ButtonGetFromQueue.Location = new System.Drawing.Point(12, 50);
             this.ButtonGetFromQueue.Name = "ButtonGetFromQueue";
-            this.ButtonGetFromQueue.Size = new System.Drawing.Size(205, 30);
+            this.ButtonGetFromQueue.Size = new System.Drawing.Size(205, 38);
             this.ButtonGetFromQueue.TabIndex = 1;
             this.ButtonGetFromQueue.Text = "Get from Queue";
             this.ButtonGetFromQueue.UseVisualStyleBackColor = true;
@@ -69,9 +69,9 @@
             // ButtonQueueItems
             // 
             this.ButtonQueueItems.Font = new System.Drawing.Font("Consolas", 11.8F);
-            this.ButtonQueueItems.Location = new System.Drawing.Point(12, 90);
+            this.ButtonQueueItems.Location = new System.Drawing.Point(12, 94);
             this.ButtonQueueItems.Name = "ButtonQueueItems";
-            this.ButtonQueueItems.Size = new System.Drawing.Size(205, 30);
+            this.ButtonQueueItems.Size = new System.Drawing.Size(205, 38);
             this.ButtonQueueItems.TabIndex = 2;
             this.ButtonQueueItems.Text = "Items in Queue";
             this.ButtonQueueItems.UseVisualStyleBackColor = true;
@@ -80,9 +80,9 @@
             // ButtonAvg
             // 
             this.ButtonAvg.Font = new System.Drawing.Font("Consolas", 11.8F);
-            this.ButtonAvg.Location = new System.Drawing.Point(12, 129);
+            this.ButtonAvg.Location = new System.Drawing.Point(12, 140);
             this.ButtonAvg.Name = "ButtonAvg";
-            this.ButtonAvg.Size = new System.Drawing.Size(205, 30);
+            this.ButtonAvg.Size = new System.Drawing.Size(205, 38);
             this.ButtonAvg.TabIndex = 3;
             this.ButtonAvg.Text = "Avg of Last N";
             this.ButtonAvg.UseVisualStyleBackColor = true;
@@ -103,7 +103,7 @@
             this.TextGetFromQueue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TextGetFromQueue.Font = new System.Drawing.Font("Consolas", 11.8F);
-            this.TextGetFromQueue.Location = new System.Drawing.Point(223, 50);
+            this.TextGetFromQueue.Location = new System.Drawing.Point(223, 55);
             this.TextGetFromQueue.Name = "TextGetFromQueue";
             this.TextGetFromQueue.ReadOnly = true;
             this.TextGetFromQueue.Size = new System.Drawing.Size(328, 31);
@@ -112,7 +112,7 @@
             // TextN
             // 
             this.TextN.Font = new System.Drawing.Font("Consolas", 11.8F);
-            this.TextN.Location = new System.Drawing.Point(254, 129);
+            this.TextN.Location = new System.Drawing.Point(254, 145);
             this.TextN.Name = "TextN";
             this.TextN.Size = new System.Drawing.Size(74, 31);
             this.TextN.TabIndex = 7;
@@ -122,7 +122,7 @@
             this.TextQueueItems.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TextQueueItems.Font = new System.Drawing.Font("Consolas", 11.8F);
-            this.TextQueueItems.Location = new System.Drawing.Point(223, 89);
+            this.TextQueueItems.Location = new System.Drawing.Point(223, 99);
             this.TextQueueItems.Name = "TextQueueItems";
             this.TextQueueItems.ReadOnly = true;
             this.TextQueueItems.Size = new System.Drawing.Size(328, 31);
@@ -133,7 +133,7 @@
             this.TextAvg.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TextAvg.Font = new System.Drawing.Font("Consolas", 11.8F);
-            this.TextAvg.Location = new System.Drawing.Point(391, 129);
+            this.TextAvg.Location = new System.Drawing.Point(391, 145);
             this.TextAvg.Name = "TextAvg";
             this.TextAvg.ReadOnly = true;
             this.TextAvg.Size = new System.Drawing.Size(160, 31);
@@ -143,7 +143,7 @@
             // 
             this.LabelN.AutoSize = true;
             this.LabelN.Font = new System.Drawing.Font("Consolas", 13.8F);
-            this.LabelN.Location = new System.Drawing.Point(223, 129);
+            this.LabelN.Location = new System.Drawing.Point(223, 145);
             this.LabelN.Name = "LabelN";
             this.LabelN.Size = new System.Drawing.Size(25, 28);
             this.LabelN.TabIndex = 10;
@@ -153,7 +153,7 @@
             // 
             this.LabelAvg.AutoSize = true;
             this.LabelAvg.Font = new System.Drawing.Font("Consolas", 13.8F);
-            this.LabelAvg.Location = new System.Drawing.Point(334, 129);
+            this.LabelAvg.Location = new System.Drawing.Point(334, 145);
             this.LabelAvg.Name = "LabelAvg";
             this.LabelAvg.Size = new System.Drawing.Size(51, 28);
             this.LabelAvg.TabIndex = 11;
@@ -166,9 +166,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ListQueueContents.FormattingEnabled = true;
             this.ListQueueContents.ItemHeight = 16;
-            this.ListQueueContents.Location = new System.Drawing.Point(12, 165);
+            this.ListQueueContents.Location = new System.Drawing.Point(12, 181);
             this.ListQueueContents.Name = "ListQueueContents";
-            this.ListQueueContents.Size = new System.Drawing.Size(539, 228);
+            this.ListQueueContents.Size = new System.Drawing.Size(539, 212);
             this.ListQueueContents.TabIndex = 12;
             // 
             // TimerQueueList

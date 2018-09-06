@@ -54,15 +54,18 @@ namespace QueuesWithQueues
         private void ButtonAvg_Click(object sender, EventArgs e)
         {
             UInt32 numN;
-            UInt32 sum = 0;
+            double sum = 0;
             UInt32[] dataArray = dataQueue.ToArray();
+
             if (UInt32.TryParse(TextN.Text, out numN) && numN <= dataArray.Length)
             {
-                for (int i = (int)numN; i > 0; i--)
+                int startIndex = dataArray.Length - 1;
+                int endIndex = startIndex - (int)numN;
+                for (int i = startIndex; i > endIndex; i--)
                 {
                     sum += dataArray[i];
                 }
-                TextAvg.Text = sum.ToString();
+                TextAvg.Text = Math.Round((sum / numN), 4).ToString();
             }
             else
             {
@@ -73,7 +76,12 @@ namespace QueuesWithQueues
 
         private void TimerQueueList_Tick(object sender, EventArgs e)
         {
-
+            ListQueueContents.Items.Clear();
+            foreach(UInt32 i in dataQueue)
+            {
+                ListQueueContents.Items.Add(i.ToString());
+            }
+            
         }
     }
 }
