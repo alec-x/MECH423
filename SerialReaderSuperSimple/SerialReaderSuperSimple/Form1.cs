@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace SerialReaderSuperSimple
 {
-    public partial class Form1 : Form
+    public partial class FormSerialReader : Form
     {
-        public Form1()
+        public FormSerialReader()
         {
             InitializeComponent();
+        }
+
+        private void ButtonConnect_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

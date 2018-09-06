@@ -1,6 +1,6 @@
 ﻿namespace SerialReaderSuperSimple
 {
-    partial class Form1
+    partial class FormSerialReader
     {
         /// <summary>
         /// Required designer variable.
@@ -28,103 +28,120 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.components = new System.ComponentModel.Container();
+            this.ListComPort = new System.Windows.Forms.ComboBox();
+            this.ButtonConnect = new System.Windows.Forms.Button();
+            this.LabelX = new System.Windows.Forms.Label();
+            this.TextX = new System.Windows.Forms.TextBox();
+            this.TextY = new System.Windows.Forms.TextBox();
+            this.LabelY = new System.Windows.Forms.Label();
+            this.TextZ = new System.Windows.Forms.TextBox();
+            this.LabelZ = new System.Windows.Forms.Label();
+            this.SerialPort = new System.IO.Ports.SerialPort(this.components);
+            this.Timer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
-            // comboBox1
+            // ListComPort
             // 
-            this.comboBox1.Font = new System.Drawing.Font("Consolas", 12F);
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(12, 12);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(164, 31);
-            this.comboBox1.TabIndex = 0;
+            this.ListComPort.Font = new System.Drawing.Font("Consolas", 12F);
+            this.ListComPort.FormattingEnabled = true;
+            this.ListComPort.Location = new System.Drawing.Point(12, 12);
+            this.ListComPort.Name = "ListComPort";
+            this.ListComPort.Size = new System.Drawing.Size(164, 31);
+            this.ListComPort.TabIndex = 0;
             // 
-            // button1
+            // ButtonConnect
             // 
-            this.button1.Font = new System.Drawing.Font("Consolas", 12F);
-            this.button1.Location = new System.Drawing.Point(195, 7);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(124, 40);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Connect";
-            this.button1.UseVisualStyleBackColor = true;
+            this.ButtonConnect.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonConnect.Font = new System.Drawing.Font("Consolas", 12F);
+            this.ButtonConnect.Location = new System.Drawing.Point(195, 7);
+            this.ButtonConnect.Name = "ButtonConnect";
+            this.ButtonConnect.Size = new System.Drawing.Size(113, 40);
+            this.ButtonConnect.TabIndex = 1;
+            this.ButtonConnect.Text = "Connect";
+            this.ButtonConnect.UseVisualStyleBackColor = true;
+            this.ButtonConnect.Click += new System.EventHandler(this.ButtonConnect_Click);
             // 
-            // label1
+            // LabelX
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Consolas", 12F);
-            this.label1.Location = new System.Drawing.Point(12, 60);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(21, 23);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "X";
+            this.LabelX.AutoSize = true;
+            this.LabelX.Font = new System.Drawing.Font("Consolas", 12F);
+            this.LabelX.Location = new System.Drawing.Point(12, 60);
+            this.LabelX.Name = "LabelX";
+            this.LabelX.Size = new System.Drawing.Size(21, 23);
+            this.LabelX.TabIndex = 2;
+            this.LabelX.Text = "X";
             // 
-            // textBox1
+            // TextX
             // 
-            this.textBox1.Font = new System.Drawing.Font("Consolas", 12F);
-            this.textBox1.Location = new System.Drawing.Point(39, 57);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(137, 31);
-            this.textBox1.TabIndex = 3;
+            this.TextX.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TextX.Font = new System.Drawing.Font("Consolas", 12F);
+            this.TextX.Location = new System.Drawing.Point(39, 57);
+            this.TextX.Name = "TextX";
+            this.TextX.Size = new System.Drawing.Size(137, 31);
+            this.TextX.TabIndex = 3;
             // 
-            // textBox2
+            // TextY
             // 
-            this.textBox2.Font = new System.Drawing.Font("Consolas", 12F);
-            this.textBox2.Location = new System.Drawing.Point(39, 94);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(137, 31);
-            this.textBox2.TabIndex = 5;
+            this.TextY.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TextY.Font = new System.Drawing.Font("Consolas", 12F);
+            this.TextY.Location = new System.Drawing.Point(39, 94);
+            this.TextY.Name = "TextY";
+            this.TextY.Size = new System.Drawing.Size(137, 31);
+            this.TextY.TabIndex = 5;
             // 
-            // label2
+            // LabelY
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Consolas", 12F);
-            this.label2.Location = new System.Drawing.Point(12, 97);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(21, 23);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Y";
+            this.LabelY.AutoSize = true;
+            this.LabelY.Font = new System.Drawing.Font("Consolas", 12F);
+            this.LabelY.Location = new System.Drawing.Point(12, 97);
+            this.LabelY.Name = "LabelY";
+            this.LabelY.Size = new System.Drawing.Size(21, 23);
+            this.LabelY.TabIndex = 4;
+            this.LabelY.Text = "Y";
             // 
-            // textBox3
+            // TextZ
             // 
-            this.textBox3.Font = new System.Drawing.Font("Consolas", 12F);
-            this.textBox3.Location = new System.Drawing.Point(39, 131);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(137, 31);
-            this.textBox3.TabIndex = 7;
+            this.TextZ.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TextZ.Font = new System.Drawing.Font("Consolas", 12F);
+            this.TextZ.Location = new System.Drawing.Point(39, 131);
+            this.TextZ.Name = "TextZ";
+            this.TextZ.Size = new System.Drawing.Size(137, 31);
+            this.TextZ.TabIndex = 7;
             // 
-            // label3
+            // LabelZ
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Consolas", 12F);
-            this.label3.Location = new System.Drawing.Point(12, 134);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(21, 23);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Z";
+            this.LabelZ.AutoSize = true;
+            this.LabelZ.Font = new System.Drawing.Font("Consolas", 12F);
+            this.LabelZ.Location = new System.Drawing.Point(12, 134);
+            this.LabelZ.Name = "LabelZ";
+            this.LabelZ.Size = new System.Drawing.Size(21, 23);
+            this.LabelZ.TabIndex = 6;
+            this.LabelZ.Text = "Z";
             // 
-            // Form1
+            // Timer
+            // 
+            this.Timer.Enabled = true;
+            // 
+            // FormSerialReader
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(352, 175);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.comboBox1);
-            this.Name = "Form1";
+            this.ClientSize = new System.Drawing.Size(320, 178);
+            this.Controls.Add(this.TextZ);
+            this.Controls.Add(this.LabelZ);
+            this.Controls.Add(this.TextY);
+            this.Controls.Add(this.LabelY);
+            this.Controls.Add(this.TextX);
+            this.Controls.Add(this.LabelX);
+            this.Controls.Add(this.ButtonConnect);
+            this.Controls.Add(this.ListComPort);
+            this.MinimumSize = new System.Drawing.Size(338, 222);
+            this.Name = "FormSerialReader";
             this.Text = "Form1";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -133,14 +150,16 @@
 
         #endregion
 
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox ListComPort;
+        private System.Windows.Forms.Button ButtonConnect;
+        private System.Windows.Forms.Label LabelX;
+        private System.Windows.Forms.TextBox TextX;
+        private System.Windows.Forms.TextBox TextY;
+        private System.Windows.Forms.Label LabelY;
+        private System.Windows.Forms.TextBox TextZ;
+        private System.Windows.Forms.Label LabelZ;
+        private System.IO.Ports.SerialPort SerialPort;
+        private System.Windows.Forms.Timer Timer;
     }
 }
 
