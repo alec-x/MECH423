@@ -43,7 +43,7 @@
             // 
             // ListComPort
             // 
-            this.ListComPort.DropDownHeight = 1000;
+            this.ListComPort.DropDownHeight = 250;
             this.ListComPort.Font = new System.Drawing.Font("Consolas", 12F);
             this.ListComPort.FormattingEnabled = true;
             this.ListComPort.IntegralHeight = false;
