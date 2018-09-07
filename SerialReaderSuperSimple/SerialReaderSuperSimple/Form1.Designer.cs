@@ -49,6 +49,7 @@
             this.ListComPort.Name = "ListComPort";
             this.ListComPort.Size = new System.Drawing.Size(164, 31);
             this.ListComPort.TabIndex = 0;
+            this.ListComPort.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ListComPort_MouseClick);
             // 
             // ButtonConnect
             // 
@@ -126,7 +127,6 @@
             // Timer
             // 
             this.Timer.Enabled = true;
-            this.Timer.Tick += new System.EventHandler(this.Timer_Tick);
             // 
             // FormSerialReader
             // 
@@ -144,6 +144,7 @@
             this.MinimumSize = new System.Drawing.Size(338, 222);
             this.Name = "FormSerialReader";
             this.Text = "Serial Reader";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormSerialReader_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
