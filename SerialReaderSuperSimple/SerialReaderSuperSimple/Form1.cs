@@ -19,14 +19,24 @@ namespace SerialReaderSuperSimple
 
         private void ButtonConnect_Click(object sender, EventArgs e)
         {
-            string selectedPort = ListComPort.Text;
-            Boolean isOpen = true;
+            if (SerialPort.IsOpen)
+            {
+                SerialPort.Close();
+                ButtonConnect.Text = "Connect";
+            }
+            else
+            {
+                SerialPort.Open();
+                ButtonConnect.Text = "Disconnect";
+            }
+
         }
 
         private void ListComPort_MouseClick(object sender, MouseEventArgs e)
         {
             ListComPort.Items.Clear();
-            string[] portNames = System.IO.Ports.SerialPort.GetPortNames().ToArray();
+            //ToArray() seems redundant given GetPortNames returns string[]
+            string[] portNames = System.IO.Ports.SerialPort.GetPortNames();
             foreach (string name in portNames)
             {
                 ListComPort.Items.Add(name);
@@ -36,6 +46,11 @@ namespace SerialReaderSuperSimple
         private void FormSerialReader_FormClosing(object sender, FormClosingEventArgs e)
         {
             SerialPort.Close();
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+
         }
     }
 }
