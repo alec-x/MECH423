@@ -36,11 +36,14 @@ namespace SerialReaderSuperSimple
         {
             ListComPort.Items.Clear();
             //ToArray() seems redundant given GetPortNames returns string[]
-            string[] portNames = System.IO.Ports.SerialPort.GetPortNames();
-            foreach (string name in portNames)
-            {
-                ListComPort.Items.Add(name);
-            }
+//            string[] portNames = System.IO.Ports.SerialPort.GetPortNames();
+//            foreach (string name in portNames)
+//            {
+//                ListComPort.Items.Add(name);
+//            }
+            ListComPort.Items.Add("COM1");
+            ListComPort.Items.Add("COM2");
+            ListComPort.Items.Add("COM3");
         }
 
         private void FormSerialReader_FormClosing(object sender, FormClosingEventArgs e)
@@ -51,6 +54,11 @@ namespace SerialReaderSuperSimple
         private void Timer_Tick(object sender, EventArgs e)
         {
 
+        }
+
+        private void ListComPort_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Console.WriteLine("1");
         }
     }
 }

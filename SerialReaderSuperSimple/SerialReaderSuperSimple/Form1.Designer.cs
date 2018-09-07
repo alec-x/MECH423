@@ -43,12 +43,16 @@
             // 
             // ListComPort
             // 
+            this.ListComPort.DropDownHeight = 1000;
             this.ListComPort.Font = new System.Drawing.Font("Consolas", 12F);
             this.ListComPort.FormattingEnabled = true;
+            this.ListComPort.IntegralHeight = false;
             this.ListComPort.Location = new System.Drawing.Point(12, 12);
+            this.ListComPort.MaxDropDownItems = 20;
             this.ListComPort.Name = "ListComPort";
             this.ListComPort.Size = new System.Drawing.Size(164, 31);
             this.ListComPort.TabIndex = 0;
+            this.ListComPort.SelectedIndexChanged += new System.EventHandler(this.ListComPort_SelectedIndexChanged);
             this.ListComPort.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ListComPort_MouseClick);
             // 
             // ButtonConnect
