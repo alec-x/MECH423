@@ -62,7 +62,7 @@
             this.ButtonConnect.Font = new System.Drawing.Font("Consolas", 12F);
             this.ButtonConnect.Location = new System.Drawing.Point(195, 7);
             this.ButtonConnect.Name = "ButtonConnect";
-            this.ButtonConnect.Size = new System.Drawing.Size(113, 40);
+            this.ButtonConnect.Size = new System.Drawing.Size(177, 40);
             this.ButtonConnect.TabIndex = 1;
             this.ButtonConnect.Text = "Connect";
             this.ButtonConnect.UseVisualStyleBackColor = true;
@@ -85,7 +85,7 @@
             this.TextX.Font = new System.Drawing.Font("Consolas", 12F);
             this.TextX.Location = new System.Drawing.Point(39, 57);
             this.TextX.Name = "TextX";
-            this.TextX.Size = new System.Drawing.Size(137, 31);
+            this.TextX.Size = new System.Drawing.Size(333, 31);
             this.TextX.TabIndex = 3;
             // 
             // TextY
@@ -95,7 +95,7 @@
             this.TextY.Font = new System.Drawing.Font("Consolas", 12F);
             this.TextY.Location = new System.Drawing.Point(39, 94);
             this.TextY.Name = "TextY";
-            this.TextY.Size = new System.Drawing.Size(137, 31);
+            this.TextY.Size = new System.Drawing.Size(333, 31);
             this.TextY.TabIndex = 5;
             // 
             // LabelY
@@ -115,7 +115,7 @@
             this.TextZ.Font = new System.Drawing.Font("Consolas", 12F);
             this.TextZ.Location = new System.Drawing.Point(39, 131);
             this.TextZ.Name = "TextZ";
-            this.TextZ.Size = new System.Drawing.Size(137, 31);
+            this.TextZ.Size = new System.Drawing.Size(333, 31);
             this.TextZ.TabIndex = 7;
             // 
             // LabelZ
@@ -128,6 +128,10 @@
             this.LabelZ.TabIndex = 6;
             this.LabelZ.Text = "Z";
             // 
+            // SerialPort
+            // 
+            this.SerialPort.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.SerialPort_DataReceived);
+            // 
             // Timer
             // 
             this.Timer.Enabled = true;
@@ -137,7 +141,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(320, 178);
+            this.ClientSize = new System.Drawing.Size(384, 178);
             this.Controls.Add(this.TextZ);
             this.Controls.Add(this.LabelZ);
             this.Controls.Add(this.TextY);
@@ -146,7 +150,7 @@
             this.Controls.Add(this.LabelX);
             this.Controls.Add(this.ButtonConnect);
             this.Controls.Add(this.ListComPort);
-            this.MinimumSize = new System.Drawing.Size(338, 222);
+            this.MinimumSize = new System.Drawing.Size(402, 225);
             this.Name = "FormSerialReader";
             this.Text = "Serial Reader";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormSerialReader_FormClosing);
