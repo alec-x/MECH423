@@ -14,7 +14,7 @@ namespace SerialReaderSuperSimple
     public partial class FormSerialReader : Form
     {
         //Form variable
-        ConcurrentQueue<int> serialReadQueue;
+        ConcurrentQueue<int> serialReadQueue = new ConcurrentQueue<int>();
         
 
         public FormSerialReader()
@@ -77,15 +77,21 @@ namespace SerialReaderSuperSimple
         private void Timer_Tick(object sender, EventArgs e)
         {
             int firstByte = 0;
-            //if (serialReadQueue.TryPeek(out firstByte))
-            //{
-            //    Console.WriteLine("Queue could not be read");
-            //    return;
-            //}
-            //if(serialReadQueue.Count >= 4 && firstByte == 255)
-            //{
-
-            //}
+            int xByte, yByte, zByte;
+            while (firstByte != 255 && !serialReadQueue.IsEmpty)
+            {
+                serialReadQueue.TryDequeue(out firstByte);
+            }
+            while(serialReadQueue.Count >= 4 && firstByte == 255)
+            {
+                serialReadQueue.TryDequeue(out xByte);
+                serialReadQueue.TryDequeue(out yByte);
+                serialReadQueue.TryDequeue(out zByte);
+                serialReadQueue.TryDequeue(out firstByte);
+                TextX.Text = xByte.ToString();
+                TextY.Text = yByte.ToString();
+                TextZ.Text = zByte.ToString();
+            }
         }
 
         private void SerialPort_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
