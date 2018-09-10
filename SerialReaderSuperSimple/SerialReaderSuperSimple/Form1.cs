@@ -29,11 +29,13 @@ namespace SerialReaderSuperSimple
                 {
                     SerialPort.Close();
                     ButtonConnect.Text = "Connect";
+                    Console.WriteLine(String.Format("Disconnected from serial port {0}", SerialPort.PortName));
                 }
                 else
                 {
                     SerialPort.Open();
                     ButtonConnect.Text = "Disconnect";
+                    Console.WriteLine(String.Format("Connected to serial port {0}", SerialPort.PortName));
                 }
             }
             catch (System.IO.IOException)
