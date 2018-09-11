@@ -135,6 +135,7 @@
             // Timer
             // 
             this.Timer.Enabled = true;
+            this.Timer.Interval = 50;
             this.Timer.Tick += new System.EventHandler(this.Timer_Tick);
             // 
             // FormSerialReader

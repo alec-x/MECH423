@@ -90,9 +90,9 @@ namespace SerialReaderSuperSimple
                 serialReadQueue.TryDequeue(out yByte);
                 serialReadQueue.TryDequeue(out zByte);
                 serialReadQueue.TryDequeue(out firstByte);
-                TextX.Text = xByte.ToString();
-                TextY.Text = yByte.ToString();
-                TextZ.Text = zByte.ToString();
+                TextX.Text = (xByte - 125).ToString(); //normalized data to disclude constant error?
+                TextY.Text = (yByte - 124).ToString();
+                TextZ.Text = (zByte - 154).ToString();
             }
         }
 
