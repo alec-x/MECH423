@@ -30,6 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.Timer = new System.Windows.Forms.Timer(this.components);
             this.SerialPort = new System.IO.Ports.SerialPort(this.components);
             this.TextAccelX = new System.Windows.Forms.TextBox();
@@ -57,11 +60,19 @@
             this.PictureDown = new System.Windows.Forms.PictureBox();
             this.ButtonGameStart = new System.Windows.Forms.Button();
             this.ListDialogue = new System.Windows.Forms.ListBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.ChartAcceleration = new System.Windows.Forms.DataVisualization.Charting.Chart();
             ((System.ComponentModel.ISupportInitialize)(this.PictureLeft)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureMiddle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureRight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureUp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ChartAcceleration)).BeginInit();
             this.SuspendLayout();
             // 
             // Timer
@@ -314,16 +325,60 @@
             this.ListDialogue.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F);
             this.ListDialogue.FormattingEnabled = true;
             this.ListDialogue.ItemHeight = 21;
-            this.ListDialogue.Location = new System.Drawing.Point(432, 12);
+            this.ListDialogue.Location = new System.Drawing.Point(454, 12);
             this.ListDialogue.Name = "ListDialogue";
-            this.ListDialogue.Size = new System.Drawing.Size(306, 361);
+            this.ListDialogue.Size = new System.Drawing.Size(284, 130);
             this.ListDialogue.TabIndex = 26;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(416, 38);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(32, 29);
+            this.pictureBox1.TabIndex = 27;
+            this.pictureBox1.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Location = new System.Drawing.Point(416, 71);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(32, 29);
+            this.pictureBox2.TabIndex = 28;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Location = new System.Drawing.Point(416, 108);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(32, 29);
+            this.pictureBox3.TabIndex = 29;
+            this.pictureBox3.TabStop = false;
+            // 
+            // ChartAcceleration
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.ChartAcceleration.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.ChartAcceleration.Legends.Add(legend1);
+            this.ChartAcceleration.Location = new System.Drawing.Point(214, 159);
+            this.ChartAcceleration.Name = "ChartAcceleration";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.ChartAcceleration.Series.Add(series1);
+            this.ChartAcceleration.Size = new System.Drawing.Size(524, 179);
+            this.ChartAcceleration.TabIndex = 30;
+            this.ChartAcceleration.Text = "Acceleration";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1057, 386);
+            this.Controls.Add(this.ChartAcceleration);
+            this.Controls.Add(this.pictureBox3);
+            this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.ListDialogue);
             this.Controls.Add(this.ButtonGameStart);
             this.Controls.Add(this.PictureDown);
@@ -357,6 +412,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.PictureRight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureUp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ChartAcceleration)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -391,6 +450,10 @@
         private System.Windows.Forms.PictureBox PictureDown;
         private System.Windows.Forms.Button ButtonGameStart;
         private System.Windows.Forms.ListBox ListDialogue;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.DataVisualization.Charting.Chart ChartAcceleration;
     }
 }
 
