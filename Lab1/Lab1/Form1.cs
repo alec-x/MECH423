@@ -18,6 +18,9 @@ namespace Lab1
         List<int> yAvgList = new List<int>();
         List<int> zAvgList = new List<int>();
 
+        int gameState = 0;
+        int gameScore = 0;
+
         public MainForm()
         {
             InitializeComponent();

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.Timer = new System.Windows.Forms.Timer(this.components);
             this.SerialPort = new System.IO.Ports.SerialPort(this.components);
             this.TextAccelX = new System.Windows.Forms.TextBox();
@@ -66,6 +67,7 @@
             // Timer
             // 
             this.Timer.Enabled = true;
+            this.Timer.Interval = 50;
             this.Timer.Tick += new System.EventHandler(this.Timer_Tick);
             // 
             // SerialPort
@@ -232,7 +234,7 @@
             this.ButtonConnect.Name = "ButtonConnect";
             this.ButtonConnect.Size = new System.Drawing.Size(151, 31);
             this.ButtonConnect.TabIndex = 18;
-            this.ButtonConnect.Text = "Disconnect";
+            this.ButtonConnect.Text = "Connect";
             this.ButtonConnect.UseVisualStyleBackColor = true;
             this.ButtonConnect.Click += new System.EventHandler(this.ButtonConnect_Click);
             // 
@@ -249,41 +251,51 @@
             // 
             // PictureLeft
             // 
+            this.PictureLeft.Image = global::Lab1.Properties.Resources.mole;
             this.PictureLeft.Location = new System.Drawing.Point(761, 108);
             this.PictureLeft.Name = "PictureLeft";
             this.PictureLeft.Size = new System.Drawing.Size(89, 85);
+            this.PictureLeft.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.PictureLeft.TabIndex = 20;
             this.PictureLeft.TabStop = false;
             // 
             // PictureMiddle
             // 
+            this.PictureMiddle.Image = ((System.Drawing.Image)(resources.GetObject("PictureMiddle.Image")));
             this.PictureMiddle.Location = new System.Drawing.Point(856, 108);
             this.PictureMiddle.Name = "PictureMiddle";
             this.PictureMiddle.Size = new System.Drawing.Size(89, 85);
+            this.PictureMiddle.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.PictureMiddle.TabIndex = 21;
             this.PictureMiddle.TabStop = false;
             // 
             // PictureRight
             // 
+            this.PictureRight.Image = global::Lab1.Properties.Resources.mole;
             this.PictureRight.Location = new System.Drawing.Point(951, 108);
             this.PictureRight.Name = "PictureRight";
             this.PictureRight.Size = new System.Drawing.Size(89, 85);
+            this.PictureRight.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.PictureRight.TabIndex = 22;
             this.PictureRight.TabStop = false;
             // 
             // PictureUp
             // 
+            this.PictureUp.Image = ((System.Drawing.Image)(resources.GetObject("PictureUp.Image")));
             this.PictureUp.Location = new System.Drawing.Point(856, 15);
             this.PictureUp.Name = "PictureUp";
             this.PictureUp.Size = new System.Drawing.Size(89, 85);
+            this.PictureUp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.PictureUp.TabIndex = 23;
             this.PictureUp.TabStop = false;
             // 
             // PictureDown
             // 
+            this.PictureDown.Image = ((System.Drawing.Image)(resources.GetObject("PictureDown.Image")));
             this.PictureDown.Location = new System.Drawing.Point(856, 199);
             this.PictureDown.Name = "PictureDown";
             this.PictureDown.Size = new System.Drawing.Size(89, 85);
+            this.PictureDown.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.PictureDown.TabIndex = 24;
             this.PictureDown.TabStop = false;
             // 
