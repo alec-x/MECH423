@@ -34,17 +34,17 @@
             this.TextAccelX = new System.Windows.Forms.TextBox();
             this.LabelAccelX = new System.Windows.Forms.Label();
             this.LabelAccelY = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.TextAccelY = new System.Windows.Forms.TextBox();
             this.LabelAccelZ = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.TextAccelZ = new System.Windows.Forms.TextBox();
             this.LabelAccel = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.LabelBuffer = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.TextAvgAccelZ = new System.Windows.Forms.TextBox();
+            this.TextAvgAccelY = new System.Windows.Forms.TextBox();
+            this.TextAvgAccelX = new System.Windows.Forms.TextBox();
             this.LabelOrientation = new System.Windows.Forms.Label();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.ButtonConnect = new System.Windows.Forms.Button();
@@ -67,6 +67,10 @@
             // 
             this.Timer.Enabled = true;
             this.Timer.Tick += new System.EventHandler(this.Timer_Tick);
+            // 
+            // SerialPort
+            // 
+            this.SerialPort.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.SerialPort_DataReceived);
             // 
             // TextAccelX
             // 
@@ -97,14 +101,14 @@
             this.LabelAccelY.TabIndex = 5;
             this.LabelAccelY.Text = "Y";
             // 
-            // textBox1
+            // TextAccelY
             // 
-            this.textBox1.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(38, 73);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(181, 29);
-            this.textBox1.TabIndex = 4;
+            this.TextAccelY.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TextAccelY.Location = new System.Drawing.Point(38, 73);
+            this.TextAccelY.Name = "TextAccelY";
+            this.TextAccelY.ReadOnly = true;
+            this.TextAccelY.Size = new System.Drawing.Size(181, 29);
+            this.TextAccelY.TabIndex = 4;
             // 
             // LabelAccelZ
             // 
@@ -116,14 +120,14 @@
             this.LabelAccelZ.TabIndex = 7;
             this.LabelAccelZ.Text = "Z";
             // 
-            // textBox2
+            // TextAccelZ
             // 
-            this.textBox2.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(38, 108);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(181, 29);
-            this.textBox2.TabIndex = 6;
+            this.TextAccelZ.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TextAccelZ.Location = new System.Drawing.Point(38, 108);
+            this.TextAccelZ.Name = "TextAccelZ";
+            this.TextAccelZ.ReadOnly = true;
+            this.TextAccelZ.Size = new System.Drawing.Size(181, 29);
+            this.TextAccelZ.TabIndex = 6;
             // 
             // LabelAccel
             // 
@@ -138,7 +142,7 @@
             // progressBar1
             // 
             this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.progressBar1.Location = new System.Drawing.Point(239, 349);
+            this.progressBar1.Location = new System.Drawing.Point(254, 349);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(72, 23);
             this.progressBar1.TabIndex = 9;
@@ -148,7 +152,7 @@
             this.LabelBuffer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.LabelBuffer.AutoSize = true;
             this.LabelBuffer.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelBuffer.Location = new System.Drawing.Point(157, 349);
+            this.LabelBuffer.Location = new System.Drawing.Point(172, 349);
             this.LabelBuffer.Name = "LabelBuffer";
             this.LabelBuffer.Size = new System.Drawing.Size(76, 22);
             this.LabelBuffer.TabIndex = 10;
@@ -159,7 +163,7 @@
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(317, 349);
+            this.label1.Location = new System.Drawing.Point(332, 349);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(76, 22);
             this.label1.TabIndex = 11;
@@ -175,32 +179,32 @@
             this.label2.TabIndex = 15;
             this.label2.Text = "Avg. last 100";
             // 
-            // textBox3
+            // TextAvgAccelZ
             // 
-            this.textBox3.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(229, 108);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(181, 29);
-            this.textBox3.TabIndex = 14;
+            this.TextAvgAccelZ.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TextAvgAccelZ.Location = new System.Drawing.Point(229, 108);
+            this.TextAvgAccelZ.Name = "TextAvgAccelZ";
+            this.TextAvgAccelZ.ReadOnly = true;
+            this.TextAvgAccelZ.Size = new System.Drawing.Size(181, 29);
+            this.TextAvgAccelZ.TabIndex = 14;
             // 
-            // textBox4
+            // TextAvgAccelY
             // 
-            this.textBox4.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox4.Location = new System.Drawing.Point(229, 73);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.ReadOnly = true;
-            this.textBox4.Size = new System.Drawing.Size(181, 29);
-            this.textBox4.TabIndex = 13;
+            this.TextAvgAccelY.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TextAvgAccelY.Location = new System.Drawing.Point(229, 73);
+            this.TextAvgAccelY.Name = "TextAvgAccelY";
+            this.TextAvgAccelY.ReadOnly = true;
+            this.TextAvgAccelY.Size = new System.Drawing.Size(181, 29);
+            this.TextAvgAccelY.TabIndex = 13;
             // 
-            // textBox5
+            // TextAvgAccelX
             // 
-            this.textBox5.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox5.Location = new System.Drawing.Point(229, 38);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.ReadOnly = true;
-            this.textBox5.Size = new System.Drawing.Size(181, 29);
-            this.textBox5.TabIndex = 12;
+            this.TextAvgAccelX.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TextAvgAccelX.Location = new System.Drawing.Point(229, 38);
+            this.TextAvgAccelX.Name = "TextAvgAccelX";
+            this.TextAvgAccelX.ReadOnly = true;
+            this.TextAvgAccelX.Size = new System.Drawing.Size(181, 29);
+            this.TextAvgAccelX.TabIndex = 12;
             // 
             // LabelOrientation
             // 
@@ -226,10 +230,11 @@
             this.ButtonConnect.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F);
             this.ButtonConnect.Location = new System.Drawing.Point(12, 307);
             this.ButtonConnect.Name = "ButtonConnect";
-            this.ButtonConnect.Size = new System.Drawing.Size(139, 31);
+            this.ButtonConnect.Size = new System.Drawing.Size(151, 31);
             this.ButtonConnect.TabIndex = 18;
             this.ButtonConnect.Text = "Disconnect";
             this.ButtonConnect.UseVisualStyleBackColor = true;
+            this.ButtonConnect.Click += new System.EventHandler(this.ButtonConnect_Click);
             // 
             // ComboPortList
             // 
@@ -237,8 +242,10 @@
             this.ComboPortList.FormattingEnabled = true;
             this.ComboPortList.Location = new System.Drawing.Point(12, 344);
             this.ComboPortList.Name = "ComboPortList";
-            this.ComboPortList.Size = new System.Drawing.Size(139, 29);
+            this.ComboPortList.Size = new System.Drawing.Size(151, 29);
             this.ComboPortList.TabIndex = 19;
+            this.ComboPortList.SelectedIndexChanged += new System.EventHandler(this.ComboPortList_SelectedIndexChanged);
+            this.ComboPortList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ComboPortList_MouseClick);
             // 
             // PictureLeft
             // 
@@ -317,21 +324,22 @@
             this.Controls.Add(this.LabelOrientation);
             this.Controls.Add(this.textBox6);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox5);
+            this.Controls.Add(this.TextAvgAccelZ);
+            this.Controls.Add(this.TextAvgAccelY);
+            this.Controls.Add(this.TextAvgAccelX);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.LabelBuffer);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.LabelAccel);
             this.Controls.Add(this.LabelAccelZ);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.TextAccelZ);
             this.Controls.Add(this.LabelAccelY);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.TextAccelY);
             this.Controls.Add(this.LabelAccelX);
             this.Controls.Add(this.TextAccelX);
             this.Name = "MainForm";
             this.Text = "Lab 1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.PictureLeft)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureMiddle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureRight)).EndInit();
@@ -349,17 +357,17 @@
         private System.Windows.Forms.TextBox TextAccelX;
         private System.Windows.Forms.Label LabelAccelX;
         private System.Windows.Forms.Label LabelAccelY;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox TextAccelY;
         private System.Windows.Forms.Label LabelAccelZ;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox TextAccelZ;
         private System.Windows.Forms.Label LabelAccel;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Label LabelBuffer;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox TextAvgAccelZ;
+        private System.Windows.Forms.TextBox TextAvgAccelY;
+        private System.Windows.Forms.TextBox TextAvgAccelX;
         private System.Windows.Forms.Label LabelOrientation;
         private System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.Button ButtonConnect;
