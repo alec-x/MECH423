@@ -17,6 +17,16 @@ namespace Lab1
         List<int> xAvgList = new List<int>();
         List<int> yAvgList = new List<int>();
         List<int> zAvgList = new List<int>();
+        int moveTimer = 0;
+        string comboList = "";
+        IDictionary<string, string> moveList = new Dictionary<string, string>()
+        {
+            {" X", "Simple Punch" },
+            {" Z X", "High Punch" },
+            {" X Y Z", "Right-Hook" }
+        };
+        WhackAMoleGame game;
+
 
         public MainForm()
         {
@@ -26,6 +36,14 @@ namespace Lab1
         private void Timer_Tick(object sender, EventArgs e)
         {
             
+            if(moveTimer >= 2000)
+            {
+                moveTimer = 0;
+                comboList = "";
+            }
+
+            moveTimer += Timer.Interval;
+
             int firstByte = 0;
             int xByte, yByte, zByte;
             while (firstByte != 255 && !serialReadQueue.IsEmpty)
@@ -133,6 +151,11 @@ namespace Lab1
         private void MainForm_Load(object sender, EventArgs e)
         {
             ChartAcceleration.DataSource = xAvgList;
+
+        }
+
+        private void ButtonGameStart_Click(object sender, EventArgs e)
+        {
 
         }
     }
