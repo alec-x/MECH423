@@ -30,9 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.Timer = new System.Windows.Forms.Timer(this.components);
             this.SerialPort = new System.IO.Ports.SerialPort(this.components);
             this.TextAccelX = new System.Windows.Forms.TextBox();
@@ -42,9 +42,9 @@
             this.LabelAccelZ = new System.Windows.Forms.Label();
             this.TextAccelZ = new System.Windows.Forms.TextBox();
             this.LabelAccel = new System.Windows.Forms.Label();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.ProgressBarBuffer = new System.Windows.Forms.ProgressBar();
             this.LabelBuffer = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.TextProgressBar = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.TextAvgAccelZ = new System.Windows.Forms.TextBox();
             this.TextAvgAccelY = new System.Windows.Forms.TextBox();
@@ -152,35 +152,36 @@
             this.LabelAccel.TabIndex = 8;
             this.LabelAccel.Text = "Acceleration (m/s)";
             // 
-            // progressBar1
+            // ProgressBarBuffer
             // 
-            this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.progressBar1.Location = new System.Drawing.Point(254, 349);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(72, 23);
-            this.progressBar1.TabIndex = 9;
+            this.ProgressBarBuffer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.ProgressBarBuffer.Location = new System.Drawing.Point(254, 401);
+            this.ProgressBarBuffer.Maximum = 4096;
+            this.ProgressBarBuffer.Name = "ProgressBarBuffer";
+            this.ProgressBarBuffer.Size = new System.Drawing.Size(72, 23);
+            this.ProgressBarBuffer.TabIndex = 9;
             // 
             // LabelBuffer
             // 
             this.LabelBuffer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.LabelBuffer.AutoSize = true;
             this.LabelBuffer.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelBuffer.Location = new System.Drawing.Point(172, 349);
+            this.LabelBuffer.Location = new System.Drawing.Point(172, 401);
             this.LabelBuffer.Name = "LabelBuffer";
             this.LabelBuffer.Size = new System.Drawing.Size(76, 22);
             this.LabelBuffer.TabIndex = 10;
             this.LabelBuffer.Text = "Buffer";
             // 
-            // label1
+            // TextProgressBar
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(332, 349);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(76, 22);
-            this.label1.TabIndex = 11;
-            this.label1.Text = "0/4096";
+            this.TextProgressBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.TextProgressBar.AutoSize = true;
+            this.TextProgressBar.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TextProgressBar.Location = new System.Drawing.Point(332, 401);
+            this.TextProgressBar.Name = "TextProgressBar";
+            this.TextProgressBar.Size = new System.Drawing.Size(76, 22);
+            this.TextProgressBar.TabIndex = 11;
+            this.TextProgressBar.Text = "0/4096";
             // 
             // label2
             // 
@@ -241,7 +242,7 @@
             // ButtonConnect
             // 
             this.ButtonConnect.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F);
-            this.ButtonConnect.Location = new System.Drawing.Point(12, 307);
+            this.ButtonConnect.Location = new System.Drawing.Point(12, 360);
             this.ButtonConnect.Name = "ButtonConnect";
             this.ButtonConnect.Size = new System.Drawing.Size(151, 31);
             this.ButtonConnect.TabIndex = 18;
@@ -253,7 +254,7 @@
             // 
             this.ComboPortList.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F);
             this.ComboPortList.FormattingEnabled = true;
-            this.ComboPortList.Location = new System.Drawing.Point(12, 344);
+            this.ComboPortList.Location = new System.Drawing.Point(12, 397);
             this.ComboPortList.Name = "ComboPortList";
             this.ComboPortList.Size = new System.Drawing.Size(151, 29);
             this.ComboPortList.TabIndex = 19;
@@ -313,7 +314,7 @@
             // ButtonGameStart
             // 
             this.ButtonGameStart.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F);
-            this.ButtonGameStart.Location = new System.Drawing.Point(901, 340);
+            this.ButtonGameStart.Location = new System.Drawing.Point(906, 396);
             this.ButtonGameStart.Name = "ButtonGameStart";
             this.ButtonGameStart.Size = new System.Drawing.Size(139, 31);
             this.ButtonGameStart.TabIndex = 25;
@@ -356,17 +357,18 @@
             // 
             // ChartAcceleration
             // 
-            chartArea1.Name = "ChartArea1";
-            this.ChartAcceleration.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.ChartAcceleration.Legends.Add(legend1);
-            this.ChartAcceleration.Location = new System.Drawing.Point(214, 159);
+            chartArea2.Name = "ChartArea1";
+            this.ChartAcceleration.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.ChartAcceleration.Legends.Add(legend2);
+            this.ChartAcceleration.Location = new System.Drawing.Point(229, 159);
             this.ChartAcceleration.Name = "ChartAcceleration";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.ChartAcceleration.Series.Add(series1);
-            this.ChartAcceleration.Size = new System.Drawing.Size(524, 179);
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.ChartAcceleration.Series.Add(series2);
+            this.ChartAcceleration.Size = new System.Drawing.Size(509, 236);
             this.ChartAcceleration.TabIndex = 30;
             this.ChartAcceleration.Text = "Acceleration";
             // 
@@ -374,7 +376,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1057, 386);
+            this.ClientSize = new System.Drawing.Size(1057, 438);
             this.Controls.Add(this.ChartAcceleration);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.pictureBox2);
@@ -394,9 +396,9 @@
             this.Controls.Add(this.TextAvgAccelZ);
             this.Controls.Add(this.TextAvgAccelY);
             this.Controls.Add(this.TextAvgAccelX);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.TextProgressBar);
             this.Controls.Add(this.LabelBuffer);
-            this.Controls.Add(this.progressBar1);
+            this.Controls.Add(this.ProgressBarBuffer);
             this.Controls.Add(this.LabelAccel);
             this.Controls.Add(this.LabelAccelZ);
             this.Controls.Add(this.TextAccelZ);
@@ -407,6 +409,7 @@
             this.Name = "MainForm";
             this.Text = "Lab 1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.PictureLeft)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureMiddle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureRight)).EndInit();
@@ -432,9 +435,9 @@
         private System.Windows.Forms.Label LabelAccelZ;
         private System.Windows.Forms.TextBox TextAccelZ;
         private System.Windows.Forms.Label LabelAccel;
-        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.ProgressBar ProgressBarBuffer;
         private System.Windows.Forms.Label LabelBuffer;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label TextProgressBar;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox TextAvgAccelZ;
         private System.Windows.Forms.TextBox TextAvgAccelY;

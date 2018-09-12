@@ -18,9 +18,6 @@ namespace Lab1
         List<int> yAvgList = new List<int>();
         List<int> zAvgList = new List<int>();
 
-        int gameState = 0;
-        int gameScore = 0;
-
         public MainForm()
         {
             InitializeComponent();
@@ -56,7 +53,16 @@ namespace Lab1
                 TextAccelX.Text = (xByte - 125).ToString(); //normalized data to disclude constant error?
                 TextAccelY.Text = (yByte - 124).ToString();
                 TextAccelZ.Text = (zByte - 154).ToString();
+
+                ChartAcceleration.DataBind();
             }
+            if (SerialPort.IsOpen)
+            {
+                ProgressBarBuffer.Value = SerialPort.BytesToRead;
+                TextProgressBar.Text = SerialPort.BytesToRead.ToString() + 
+                                       "/" + SerialPort.ReadBufferSize;
+            }
+            
         }
 
         private void ComboPortList_MouseClick(object sender, MouseEventArgs e)
@@ -122,6 +128,12 @@ namespace Lab1
             {
                 Console.WriteLine("No clue what happened, not a System.IO.IOException");
             }
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            ChartAcceleration.DataSource = xAvgList;
+
         }
     }
 }
