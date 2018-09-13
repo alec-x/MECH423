@@ -13,6 +13,7 @@ namespace Lab1
 {
     public partial class MainForm : Form
     {
+
         ConcurrentQueue<int> serialReadQueue = new ConcurrentQueue<int>();
         List<int> xAvgList = new List<int>();
         List<int> yAvgList = new List<int>();
@@ -25,7 +26,9 @@ namespace Lab1
             {" Z X", "High Punch" },
             {" X Y Z", "Right-Hook" }
         };
-        WhackAMoleGame game;
+        IDictionary<string, List<int>> orientationList = new Dictionary<string, List<int>>();
+        BindingSource chartSource = new BindingSource();
+        private WhackAMoleGame game = new WhackAMoleGame();
 
 
         public MainForm()
@@ -35,8 +38,8 @@ namespace Lab1
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            
-            if(moveTimer >= 2000)
+
+            if (moveTimer >= 2000)
             {
                 moveTimer = 0;
                 comboList = "";
@@ -44,43 +47,13 @@ namespace Lab1
 
             moveTimer += Timer.Interval;
 
-            int firstByte = 0;
-            int xByte, yByte, zByte;
-            while (firstByte != 255 && !serialReadQueue.IsEmpty)
-            {
-                serialReadQueue.TryDequeue(out firstByte);
-            }
-            while (serialReadQueue.Count >= 4 && firstByte == 255)
-            {
-                serialReadQueue.TryDequeue(out xByte);
-                serialReadQueue.TryDequeue(out yByte);
-                serialReadQueue.TryDequeue(out zByte);
-                serialReadQueue.TryDequeue(out firstByte);
 
-                while (xAvgList.Count >= 100) { xAvgList.RemoveAt(0); }
-                while (yAvgList.Count >= 100) { yAvgList.RemoveAt(0); }
-                while (zAvgList.Count >= 100) { zAvgList.RemoveAt(0); }
-                xAvgList.Add(xByte - 125);
-                yAvgList.Add(yByte - 124);
-                zAvgList.Add(zByte - 154);
 
-                TextAvgAccelX.Text = xAvgList.Average().ToString();
-                TextAvgAccelY.Text = yAvgList.Average().ToString();
-                TextAvgAccelZ.Text = zAvgList.Average().ToString();
+            updateBufferBar();
+            readBuffer();
+            updateChart();
+            TextBoardOrientation.Text = GetOrientation();
 
-                TextAccelX.Text = (xByte - 125).ToString(); //normalized data to disclude constant error?
-                TextAccelY.Text = (yByte - 124).ToString();
-                TextAccelZ.Text = (zByte - 154).ToString();
-
-                ChartAcceleration.DataBind();
-            }
-            if (SerialPort.IsOpen)
-            {
-                ProgressBarBuffer.Value = SerialPort.BytesToRead;
-                TextProgressBar.Text = SerialPort.BytesToRead.ToString() + 
-                                       "/" + SerialPort.ReadBufferSize;
-            }
-            
         }
 
         private void ComboPortList_MouseClick(object sender, MouseEventArgs e)
@@ -150,13 +123,28 @@ namespace Lab1
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            ChartAcceleration.DataSource = xAvgList;
+            ComboPortList.Items.Clear();
+            ComboPortList.Items.AddRange(System.IO.Ports.SerialPort.GetPortNames());
 
+            List<int> flatList = new List<int> { 0, 0, 0 };
+            orientationList.Add("flat", flatList);
+            List<int> leftList =new List<int> { -25, 2, -27 };
+            orientationList.Add("left", leftList);
+            List<int> rightList =new List<int> { 27, 0, -23 };
+            orientationList.Add("right", rightList);
+            List<int> upList =new List<int> { 0, -26, -26 };
+            orientationList.Add("up", upList);
+            List<int> downList =new List<int> { 0, 27, -27 };
+            orientationList.Add("down", downList);
+            List<int> flippedList =new List<int> { 0, 0, -50 };
+            orientationList.Add("flipped", flippedList);
         }
 
         private void ButtonGameStart_Click(object sender, EventArgs e)
         {
 
         }
+
+
     }
 }

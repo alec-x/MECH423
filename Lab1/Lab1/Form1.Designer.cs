@@ -33,6 +33,8 @@
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.Timer = new System.Windows.Forms.Timer(this.components);
             this.SerialPort = new System.IO.Ports.SerialPort(this.components);
             this.TextAccelX = new System.Windows.Forms.TextBox();
@@ -50,7 +52,7 @@
             this.TextAvgAccelY = new System.Windows.Forms.TextBox();
             this.TextAvgAccelX = new System.Windows.Forms.TextBox();
             this.LabelOrientation = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.TextBoardOrientation = new System.Windows.Forms.TextBox();
             this.ButtonConnect = new System.Windows.Forms.Button();
             this.ComboPortList = new System.Windows.Forms.ComboBox();
             this.PictureLeft = new System.Windows.Forms.PictureBox();
@@ -150,9 +152,9 @@
             this.LabelAccel.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LabelAccel.Location = new System.Drawing.Point(11, 12);
             this.LabelAccel.Name = "LabelAccel";
-            this.LabelAccel.Size = new System.Drawing.Size(208, 22);
+            this.LabelAccel.Size = new System.Drawing.Size(142, 22);
             this.LabelAccel.TabIndex = 8;
-            this.LabelAccel.Text = "Acceleration (m/s)";
+            this.LabelAccel.Text = "Acceleration";
             // 
             // ProgressBarBuffer
             // 
@@ -232,14 +234,14 @@
             this.LabelOrientation.TabIndex = 17;
             this.LabelOrientation.Text = "Board Orientation";
             // 
-            // textBox6
+            // TextBoardOrientation
             // 
-            this.textBox6.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox6.Location = new System.Drawing.Point(15, 184);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.ReadOnly = true;
-            this.textBox6.Size = new System.Drawing.Size(181, 29);
-            this.textBox6.TabIndex = 16;
+            this.TextBoardOrientation.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TextBoardOrientation.Location = new System.Drawing.Point(15, 184);
+            this.TextBoardOrientation.Name = "TextBoardOrientation";
+            this.TextBoardOrientation.ReadOnly = true;
+            this.TextBoardOrientation.Size = new System.Drawing.Size(181, 29);
+            this.TextBoardOrientation.TabIndex = 16;
             // 
             // ButtonConnect
             // 
@@ -361,17 +363,27 @@
             // 
             // ChartAcceleration
             // 
-            chartArea1.Name = "ChartArea1";
+            chartArea1.Name = "ChartAccelerationArea";
             this.ChartAcceleration.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.ChartAcceleration.Legends.Add(legend1);
             this.ChartAcceleration.Location = new System.Drawing.Point(229, 159);
             this.ChartAcceleration.Name = "ChartAcceleration";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.ChartArea = "ChartAccelerationArea";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
             series1.Legend = "Legend1";
-            series1.Name = "Series1";
+            series1.Name = "SeriesX";
+            series2.ChartArea = "ChartAccelerationArea";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series2.Legend = "Legend1";
+            series2.Name = "SeriesY";
+            series3.ChartArea = "ChartAccelerationArea";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series3.Legend = "Legend1";
+            series3.Name = "SeriesZ";
             this.ChartAcceleration.Series.Add(series1);
+            this.ChartAcceleration.Series.Add(series2);
+            this.ChartAcceleration.Series.Add(series3);
             this.ChartAcceleration.Size = new System.Drawing.Size(509, 236);
             this.ChartAcceleration.TabIndex = 30;
             this.ChartAcceleration.Text = "Acceleration";
@@ -416,7 +428,7 @@
             this.Controls.Add(this.ComboPortList);
             this.Controls.Add(this.ButtonConnect);
             this.Controls.Add(this.LabelOrientation);
-            this.Controls.Add(this.textBox6);
+            this.Controls.Add(this.TextBoardOrientation);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.TextAvgAccelZ);
             this.Controls.Add(this.TextAvgAccelY);
@@ -468,7 +480,7 @@
         private System.Windows.Forms.TextBox TextAvgAccelY;
         private System.Windows.Forms.TextBox TextAvgAccelX;
         private System.Windows.Forms.Label LabelOrientation;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox TextBoardOrientation;
         private System.Windows.Forms.Button ButtonConnect;
         private System.Windows.Forms.ComboBox ComboPortList;
         private System.Windows.Forms.PictureBox PictureLeft;
