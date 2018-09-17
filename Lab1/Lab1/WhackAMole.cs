@@ -50,7 +50,7 @@ namespace Lab1
         {
             if(time <= 0)
             {
-                time = 3600/difficulty;
+                time = 2400/difficulty;
                 
                 foreach(System.Windows.Forms.PictureBox moleBox in listMoles)
                 {

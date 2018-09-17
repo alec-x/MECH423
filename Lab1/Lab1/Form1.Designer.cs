@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.Timer = new System.Windows.Forms.Timer(this.components);
             this.SerialPort = new System.IO.Ports.SerialPort(this.components);
             this.TextAccelX = new System.Windows.Forms.TextBox();
@@ -260,6 +260,7 @@
             // 
             // ComboPortList
             // 
+            this.ComboPortList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ComboPortList.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F);
             this.ComboPortList.FormattingEnabled = true;
             this.ComboPortList.Location = new System.Drawing.Point(12, 397);
@@ -352,27 +353,27 @@
             // 
             // ChartAcceleration
             // 
-            chartArea3.Name = "ChartAccelerationArea";
-            this.ChartAcceleration.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.ChartAcceleration.Legends.Add(legend3);
+            chartArea1.Name = "ChartAccelerationArea";
+            this.ChartAcceleration.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.ChartAcceleration.Legends.Add(legend1);
             this.ChartAcceleration.Location = new System.Drawing.Point(229, 159);
             this.ChartAcceleration.Name = "ChartAcceleration";
-            series7.ChartArea = "ChartAccelerationArea";
-            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series7.Legend = "Legend1";
-            series7.Name = "SeriesX";
-            series8.ChartArea = "ChartAccelerationArea";
-            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series8.Legend = "Legend1";
-            series8.Name = "SeriesY";
-            series9.ChartArea = "ChartAccelerationArea";
-            series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series9.Legend = "Legend1";
-            series9.Name = "SeriesZ";
-            this.ChartAcceleration.Series.Add(series7);
-            this.ChartAcceleration.Series.Add(series8);
-            this.ChartAcceleration.Series.Add(series9);
+            series1.ChartArea = "ChartAccelerationArea";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series1.Legend = "Legend1";
+            series1.Name = "SeriesX";
+            series2.ChartArea = "ChartAccelerationArea";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series2.Legend = "Legend1";
+            series2.Name = "SeriesY";
+            series3.ChartArea = "ChartAccelerationArea";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series3.Legend = "Legend1";
+            series3.Name = "SeriesZ";
+            this.ChartAcceleration.Series.Add(series1);
+            this.ChartAcceleration.Series.Add(series2);
+            this.ChartAcceleration.Series.Add(series3);
             this.ChartAcceleration.Size = new System.Drawing.Size(509, 236);
             this.ChartAcceleration.TabIndex = 30;
             this.ChartAcceleration.Text = "Acceleration";
@@ -446,6 +447,7 @@
             // 
             // ComboLevel
             // 
+            this.ComboLevel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ComboLevel.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F);
             this.ComboLevel.FormattingEnabled = true;
             this.ComboLevel.Location = new System.Drawing.Point(557, 38);
