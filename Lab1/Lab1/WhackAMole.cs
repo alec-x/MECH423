@@ -11,6 +11,7 @@ namespace Lab1
         private int score;
         private int difficulty;
         private int time;
+        private int totalTime;
         private int gamestate;
         private int currMole;
         private Random rand = new Random();
@@ -30,6 +31,7 @@ namespace Lab1
             score = 0;
             difficulty = 1;
             time = 0;
+            totalTime = 0;
             gamestate = 0;
             currMole = 0;
             listMoles = x;
@@ -39,6 +41,8 @@ namespace Lab1
         {
             gamestate = 1;
             difficulty = difficultyLevel;
+            totalTime = 60000;
+            score = 0;
         }
 
         public int GetState()
@@ -48,6 +52,10 @@ namespace Lab1
 
         public void GameLoop(string direction)
         {
+            if(totalTime <= 0)
+            {
+                GameStop();
+            }
             if(time <= 0)
             {
                 time = 2400/difficulty;
@@ -73,17 +81,22 @@ namespace Lab1
                     listMoles[currMole].Image = null;
                 }
             }
+            totalTime -= 50;
         }
 
         public void GameStop()
         {
-            score = 0;
             difficulty = 1;
             time = 0;
+            totalTime = 0;
             currMole = 0;
             gamestate = 0;
         }
 
+        public int GetTime()
+        {
+            return totalTime;
+        }
         public int GetScore()
         {
             return score;

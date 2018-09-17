@@ -94,6 +94,8 @@ namespace Lab1
             if (game.GetState() == 1)
             {
                 game.GameLoop(currentDirection);
+                TextScore.Text = game.GetScore().ToString();
+                TextTimer.Text = game.GetTime().ToString();
             }
 
             currentDirection = ""; //put current direction here so gameloop could piggyback
@@ -196,6 +198,7 @@ namespace Lab1
             ComboLevel.Items.Add("1");
             ComboLevel.Items.Add("2");
             ComboLevel.Items.Add("3");
+            ComboLevel.SelectedIndex = 0;
         }
 
         private void ButtonGameStart_Click(object sender, EventArgs e)
