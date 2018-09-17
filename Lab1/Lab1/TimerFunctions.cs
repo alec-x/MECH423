@@ -77,7 +77,7 @@ namespace Lab1
             int diff = 2000; //as long as bigger than 255 * 2 * 3 should be ok 2 for +/- 3 for x y z
             int currDiff;
             string orientation = "UNDETECTED";
-            if (xAvgList.Any())
+            if (xAvgList.Any() && SerialPort.IsOpen)
             {
                 foreach (KeyValuePair<string, List<int>> entry in orientationList)
                 {
@@ -90,6 +90,10 @@ namespace Lab1
                         orientation = entry.Key;
                     }
                 }
+            }
+            else
+            {
+                orientation = "UNDETECTED";
             }
 
 
@@ -106,6 +110,73 @@ namespace Lab1
             }
         }
 
+        private void resetMoves()
+        {
+            moveTimer = 0;
+            comboList = "";
+            moveTrigger = false;
+            PictureBoxX.BackColor = System.Drawing.Color.Transparent;
+            PictureBoxY.BackColor = System.Drawing.Color.Transparent;
+            PictureBoxZ.BackColor = System.Drawing.Color.Transparent;
+        }
+
+        private void recognizeMoves()
+        {
+            if (moveList.ContainsKey(comboList) && moveList.TryGetValue(comboList, out currentMove))
+            {
+                TextMovePerformed.Text = currentMove;
+                moveDisplay = 1000;
+                resetMoves();
+            }
+        }
+
+        private string recognizeCurrentDirection()
+        {
+            string currentDirection = "";
+            int currentDirectionThreshold = 0;
+            int baseMoveThreshold = 50;
+            moveSum[" +X"] = xAvgList[99];
+            moveSum[" -X"] = xAvgList[99]; //Skip(97).Where(x => x < 0).Sum();
+            moveSum[" +Y"] = yAvgList[99];  //Skip(97).Where(y => y > 0).Sum();
+            moveSum[" -Y"] = yAvgList[99];  //Skip(97).Where(y => y < 0).Sum();
+            moveSum[" +Z"] = zAvgList[99];  //Skip(97).Where(z => z > 0).Sum();
+            moveSum[" -Z"] = zAvgList[99];  //Skip(97).Where(z => z < 0).Sum();
+            foreach (KeyValuePair<string, int> sum in moveSum)
+            {
+                if (Math.Abs(sum.Value) > baseMoveThreshold && Math.Abs(sum.Value) > currentDirectionThreshold)
+                {
+                    moveTrigger = true;
+                    currentDirectionThreshold = sum.Value;
+                    currentDirection = sum.Key;
+                }
+            }
+
+            switch (currentDirection)
+            {
+                case " +X":
+                    PictureBoxX.BackColor = System.Drawing.Color.Green;
+                    break;
+                case " -X":
+                    PictureBoxX.BackColor = System.Drawing.Color.Red;
+                    break;
+                case " +Y":
+                    PictureBoxY.BackColor = System.Drawing.Color.Green;
+                    break;
+                case " -Y":
+                    PictureBoxY.BackColor = System.Drawing.Color.Red;
+                    break;
+                case " +Z":
+                    PictureBoxZ.BackColor = System.Drawing.Color.Green;
+                    break;
+                case " -Z":
+                    PictureBoxZ.BackColor = System.Drawing.Color.Red;
+                    break;
+            }
+
+// make switch cases for this shit
+            return currentDirection;
+
+        }
 
     }
 }

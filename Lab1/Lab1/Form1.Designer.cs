@@ -29,12 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.Timer = new System.Windows.Forms.Timer(this.components);
             this.SerialPort = new System.IO.Ports.SerialPort(this.components);
             this.TextAccelX = new System.Windows.Forms.TextBox();
@@ -61,13 +60,18 @@
             this.PictureUp = new System.Windows.Forms.PictureBox();
             this.PictureDown = new System.Windows.Forms.PictureBox();
             this.ButtonGameStart = new System.Windows.Forms.Button();
-            this.ListDialogue = new System.Windows.Forms.ListBox();
             this.PictureBoxX = new System.Windows.Forms.PictureBox();
             this.PictureBoxY = new System.Windows.Forms.PictureBox();
             this.PictureBoxZ = new System.Windows.Forms.PictureBox();
             this.ChartAcceleration = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.LabelMovePerformed = new System.Windows.Forms.Label();
             this.TextMovePerformed = new System.Windows.Forms.TextBox();
+            this.LabelTimer = new System.Windows.Forms.Label();
+            this.TextTimer = new System.Windows.Forms.TextBox();
+            this.LabelScore = new System.Windows.Forms.Label();
+            this.TextScore = new System.Windows.Forms.TextBox();
+            this.LabelLevel = new System.Windows.Forms.Label();
+            this.ComboLevel = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.PictureLeft)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureMiddle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureRight)).BeginInit();
@@ -267,7 +271,6 @@
             // 
             // PictureLeft
             // 
-            this.PictureLeft.Image = global::Lab1.Properties.Resources.mole;
             this.PictureLeft.Location = new System.Drawing.Point(761, 108);
             this.PictureLeft.Name = "PictureLeft";
             this.PictureLeft.Size = new System.Drawing.Size(89, 85);
@@ -277,7 +280,6 @@
             // 
             // PictureMiddle
             // 
-            this.PictureMiddle.Image = ((System.Drawing.Image)(resources.GetObject("PictureMiddle.Image")));
             this.PictureMiddle.Location = new System.Drawing.Point(856, 108);
             this.PictureMiddle.Name = "PictureMiddle";
             this.PictureMiddle.Size = new System.Drawing.Size(89, 85);
@@ -287,7 +289,6 @@
             // 
             // PictureRight
             // 
-            this.PictureRight.Image = global::Lab1.Properties.Resources.mole;
             this.PictureRight.Location = new System.Drawing.Point(951, 108);
             this.PictureRight.Name = "PictureRight";
             this.PictureRight.Size = new System.Drawing.Size(89, 85);
@@ -297,7 +298,6 @@
             // 
             // PictureUp
             // 
-            this.PictureUp.Image = ((System.Drawing.Image)(resources.GetObject("PictureUp.Image")));
             this.PictureUp.Location = new System.Drawing.Point(856, 15);
             this.PictureUp.Name = "PictureUp";
             this.PictureUp.Size = new System.Drawing.Size(89, 85);
@@ -307,7 +307,6 @@
             // 
             // PictureDown
             // 
-            this.PictureDown.Image = ((System.Drawing.Image)(resources.GetObject("PictureDown.Image")));
             this.PictureDown.Location = new System.Drawing.Point(856, 199);
             this.PictureDown.Name = "PictureDown";
             this.PictureDown.Size = new System.Drawing.Size(89, 85);
@@ -325,16 +324,6 @@
             this.ButtonGameStart.Text = "Start Game";
             this.ButtonGameStart.UseVisualStyleBackColor = true;
             this.ButtonGameStart.Click += new System.EventHandler(this.ButtonGameStart_Click);
-            // 
-            // ListDialogue
-            // 
-            this.ListDialogue.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F);
-            this.ListDialogue.FormattingEnabled = true;
-            this.ListDialogue.ItemHeight = 21;
-            this.ListDialogue.Location = new System.Drawing.Point(454, 12);
-            this.ListDialogue.Name = "ListDialogue";
-            this.ListDialogue.Size = new System.Drawing.Size(284, 130);
-            this.ListDialogue.TabIndex = 26;
             // 
             // PictureBoxX
             // 
@@ -354,7 +343,7 @@
             // 
             // PictureBoxZ
             // 
-            this.PictureBoxZ.BackColor = System.Drawing.Color.Red;
+            this.PictureBoxZ.BackColor = System.Drawing.Color.Transparent;
             this.PictureBoxZ.Location = new System.Drawing.Point(416, 108);
             this.PictureBoxZ.Name = "PictureBoxZ";
             this.PictureBoxZ.Size = new System.Drawing.Size(32, 29);
@@ -363,27 +352,27 @@
             // 
             // ChartAcceleration
             // 
-            chartArea1.Name = "ChartAccelerationArea";
-            this.ChartAcceleration.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.ChartAcceleration.Legends.Add(legend1);
+            chartArea3.Name = "ChartAccelerationArea";
+            this.ChartAcceleration.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.ChartAcceleration.Legends.Add(legend3);
             this.ChartAcceleration.Location = new System.Drawing.Point(229, 159);
             this.ChartAcceleration.Name = "ChartAcceleration";
-            series1.ChartArea = "ChartAccelerationArea";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series1.Legend = "Legend1";
-            series1.Name = "SeriesX";
-            series2.ChartArea = "ChartAccelerationArea";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series2.Legend = "Legend1";
-            series2.Name = "SeriesY";
-            series3.ChartArea = "ChartAccelerationArea";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series3.Legend = "Legend1";
-            series3.Name = "SeriesZ";
-            this.ChartAcceleration.Series.Add(series1);
-            this.ChartAcceleration.Series.Add(series2);
-            this.ChartAcceleration.Series.Add(series3);
+            series7.ChartArea = "ChartAccelerationArea";
+            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series7.Legend = "Legend1";
+            series7.Name = "SeriesX";
+            series8.ChartArea = "ChartAccelerationArea";
+            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series8.Legend = "Legend1";
+            series8.Name = "SeriesY";
+            series9.ChartArea = "ChartAccelerationArea";
+            series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series9.Legend = "Legend1";
+            series9.Name = "SeriesZ";
+            this.ChartAcceleration.Series.Add(series7);
+            this.ChartAcceleration.Series.Add(series8);
+            this.ChartAcceleration.Series.Add(series9);
             this.ChartAcceleration.Size = new System.Drawing.Size(509, 236);
             this.ChartAcceleration.TabIndex = 30;
             this.ChartAcceleration.Text = "Acceleration";
@@ -407,18 +396,80 @@
             this.TextMovePerformed.Size = new System.Drawing.Size(181, 29);
             this.TextMovePerformed.TabIndex = 31;
             // 
+            // LabelTimer
+            // 
+            this.LabelTimer.AutoSize = true;
+            this.LabelTimer.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LabelTimer.Location = new System.Drawing.Point(487, 111);
+            this.LabelTimer.Name = "LabelTimer";
+            this.LabelTimer.Size = new System.Drawing.Size(65, 22);
+            this.LabelTimer.TabIndex = 38;
+            this.LabelTimer.Text = "Timer";
+            // 
+            // TextTimer
+            // 
+            this.TextTimer.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TextTimer.Location = new System.Drawing.Point(557, 108);
+            this.TextTimer.Name = "TextTimer";
+            this.TextTimer.ReadOnly = true;
+            this.TextTimer.Size = new System.Drawing.Size(181, 29);
+            this.TextTimer.TabIndex = 37;
+            // 
+            // LabelScore
+            // 
+            this.LabelScore.AutoSize = true;
+            this.LabelScore.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LabelScore.Location = new System.Drawing.Point(487, 76);
+            this.LabelScore.Name = "LabelScore";
+            this.LabelScore.Size = new System.Drawing.Size(65, 22);
+            this.LabelScore.TabIndex = 36;
+            this.LabelScore.Text = "Score";
+            // 
+            // TextScore
+            // 
+            this.TextScore.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TextScore.Location = new System.Drawing.Point(557, 73);
+            this.TextScore.Name = "TextScore";
+            this.TextScore.ReadOnly = true;
+            this.TextScore.Size = new System.Drawing.Size(181, 29);
+            this.TextScore.TabIndex = 35;
+            // 
+            // LabelLevel
+            // 
+            this.LabelLevel.AutoSize = true;
+            this.LabelLevel.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LabelLevel.Location = new System.Drawing.Point(487, 41);
+            this.LabelLevel.Name = "LabelLevel";
+            this.LabelLevel.Size = new System.Drawing.Size(65, 22);
+            this.LabelLevel.TabIndex = 34;
+            this.LabelLevel.Text = "Level";
+            // 
+            // ComboLevel
+            // 
+            this.ComboLevel.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F);
+            this.ComboLevel.FormattingEnabled = true;
+            this.ComboLevel.Location = new System.Drawing.Point(557, 38);
+            this.ComboLevel.Name = "ComboLevel";
+            this.ComboLevel.Size = new System.Drawing.Size(181, 29);
+            this.ComboLevel.TabIndex = 39;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1057, 438);
+            this.Controls.Add(this.ComboLevel);
+            this.Controls.Add(this.LabelTimer);
+            this.Controls.Add(this.TextTimer);
+            this.Controls.Add(this.LabelScore);
+            this.Controls.Add(this.TextScore);
+            this.Controls.Add(this.LabelLevel);
             this.Controls.Add(this.LabelMovePerformed);
             this.Controls.Add(this.TextMovePerformed);
             this.Controls.Add(this.ChartAcceleration);
             this.Controls.Add(this.PictureBoxZ);
             this.Controls.Add(this.PictureBoxY);
             this.Controls.Add(this.PictureBoxX);
-            this.Controls.Add(this.ListDialogue);
             this.Controls.Add(this.ButtonGameStart);
             this.Controls.Add(this.PictureDown);
             this.Controls.Add(this.PictureUp);
@@ -489,13 +540,18 @@
         private System.Windows.Forms.PictureBox PictureUp;
         private System.Windows.Forms.PictureBox PictureDown;
         private System.Windows.Forms.Button ButtonGameStart;
-        private System.Windows.Forms.ListBox ListDialogue;
         private System.Windows.Forms.PictureBox PictureBoxX;
         private System.Windows.Forms.PictureBox PictureBoxY;
         private System.Windows.Forms.PictureBox PictureBoxZ;
         private System.Windows.Forms.DataVisualization.Charting.Chart ChartAcceleration;
         private System.Windows.Forms.Label LabelMovePerformed;
         private System.Windows.Forms.TextBox TextMovePerformed;
+        private System.Windows.Forms.Label LabelTimer;
+        private System.Windows.Forms.TextBox TextTimer;
+        private System.Windows.Forms.Label LabelScore;
+        private System.Windows.Forms.TextBox TextScore;
+        private System.Windows.Forms.Label LabelLevel;
+        private System.Windows.Forms.ComboBox ComboLevel;
     }
 }
 

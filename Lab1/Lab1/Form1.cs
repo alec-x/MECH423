@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Collections.Concurrent;
+using System.Linq;
 
 namespace Lab1
 {
@@ -18,18 +19,35 @@ namespace Lab1
         List<int> xAvgList = new List<int>();
         List<int> yAvgList = new List<int>();
         List<int> zAvgList = new List<int>();
+        bool moveTrigger = false;
+        string currentDirection;
         int moveTimer = 0;
+        int delay = 0;
+        int moveDisplay;
+        
+        
+        string currentMove;
         string comboList = "";
+        IDictionary<string, int> moveSum = new Dictionary<string, int>()
+        {
+            {" +X", 0},
+            {" -X", 0},
+            {" +Y", 0},
+            {" -Y", 0},
+            {" +Z", 0},
+            {" -Z", 0}
+        };
         IDictionary<string, string> moveList = new Dictionary<string, string>()
         {
-            {" X", "Simple Punch" },
-            {" Z X", "High Punch" },
-            {" X Y Z", "Right-Hook" }
+            {" +X", "Simple Punch" },
+            {" +Z +X", "High Punch" },
+            {" +X +Y +Z", "Right-Hook" },
+            {" +Z -Z, +Z", "Kame Hame Ha" }
         };
         IDictionary<string, List<int>> orientationList = new Dictionary<string, List<int>>();
-        BindingSource chartSource = new BindingSource();
-        private WhackAMoleGame game = new WhackAMoleGame();
-
+        
+        static List<System.Windows.Forms.PictureBox> moleList = new List<System.Windows.Forms.PictureBox>();
+        private WhackAMoleGame game = new WhackAMoleGame(ref moleList);
 
         public MainForm()
         {
@@ -38,17 +56,47 @@ namespace Lab1
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-
-            if (moveTimer >= 2000)
+            if(moveDisplay <= 0 && SerialPort.IsOpen && xAvgList.Count >99)
             {
-                moveTimer = 0;
-                comboList = "";
+                TextMovePerformed.Text = "";
+                if (moveTimer >= 2000 || !moveTrigger)
+                {
+                    recognizeMoves();
+                    resetMoves();
+                }
+                else
+                {
+                    moveTimer += Timer.Interval;
+                }
+
+                if(delay > 0)
+                {
+                    delay -= Timer.Interval;
+                }
+                else
+                {
+                    currentDirection = recognizeCurrentDirection();
+                }
+                
+                if(currentDirection != "")
+                {
+                    delay = 200;
+                }
+                comboList += currentDirection;
+                
+                
+            }
+            else
+            {
+                moveDisplay -= Timer.Interval;
             }
 
-            moveTimer += Timer.Interval;
+            if (game.GetState() == 1)
+            {
+                game.GameLoop(currentDirection);
+            }
 
-
-
+            currentDirection = ""; //put current direction here so gameloop could piggyback
             updateBufferBar();
             readBuffer();
             updateChart();
@@ -138,13 +186,21 @@ namespace Lab1
             orientationList.Add("down", downList);
             List<int> flippedList =new List<int> { 0, 0, -50 };
             orientationList.Add("flipped", flippedList);
+
+            moleList.Add(PictureUp);
+            moleList.Add(PictureDown);
+            moleList.Add(PictureLeft);
+            moleList.Add(PictureRight);
+            moleList.Add(PictureMiddle);
+
+            ComboLevel.Items.Add("1");
+            ComboLevel.Items.Add("2");
+            ComboLevel.Items.Add("3");
         }
 
         private void ButtonGameStart_Click(object sender, EventArgs e)
         {
-
+            game.GameStart(int.Parse(ComboLevel.SelectedItem.ToString()));
         }
-
-
     }
 }
