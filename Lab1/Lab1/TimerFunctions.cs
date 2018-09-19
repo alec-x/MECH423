@@ -134,7 +134,7 @@ namespace Lab1
         {
             string currentDirection = "";
             int currentDirectionThreshold = 0;
-            int baseMoveThreshold = 50;
+            int baseMoveThreshold = 35;
             moveSum[" +X"] = xAvgList[99];
             moveSum[" -X"] = xAvgList[99]; //Skip(97).Where(x => x < 0).Sum();
             moveSum[" +Y"] = yAvgList[99];  //Skip(97).Where(y => y > 0).Sum();

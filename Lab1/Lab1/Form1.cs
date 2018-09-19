@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Collections.Concurrent;
-using System.Linq;
 
 namespace Lab1
 {
@@ -96,6 +95,10 @@ namespace Lab1
                 game.GameLoop(currentDirection);
                 TextScore.Text = game.GetScore().ToString();
                 TextTimer.Text = game.GetTime().ToString();
+            }
+            else
+            {
+                TextTimer.Text = "0";
             }
 
             currentDirection = ""; //put current direction here so gameloop could piggyback

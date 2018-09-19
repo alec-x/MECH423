@@ -91,5 +91,14 @@
   <ItemGroup>
     <None Include="Resources\mole.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\doh.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\doh.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\game_over.wav" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

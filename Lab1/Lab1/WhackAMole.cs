@@ -16,12 +16,16 @@ namespace Lab1
         private int currMole;
         private Random rand = new Random();
         private List<System.Windows.Forms.PictureBox> listMoles;
+
+        System.Media.SoundPlayer dohPlayer;
+        System.Media.SoundPlayer gameoverPlayer;
+
         IDictionary<int, string> moleDict = new Dictionary<int, string>()
         {
             { 0, " +Z" },
             { 1, " -Z" },
-            { 2, " -Y" },
-            { 3, " +Y" },
+            { 2, " +Y" },
+            { 3, " -Y" },
             { 4, " +X" },
         };
 
@@ -35,13 +39,15 @@ namespace Lab1
             gamestate = 0;
             currMole = 0;
             listMoles = x;
+            dohPlayer = new System.Media.SoundPlayer(Lab1.Properties.Resources.doh);
+            gameoverPlayer = new System.Media.SoundPlayer(Lab1.Properties.Resources.game_over);
         }
 
         public void GameStart(int difficultyLevel)
         {
             gamestate = 1;
             difficulty = difficultyLevel;
-            totalTime = 60000;
+            totalTime = 30000;
             score = 0;
         }
 
@@ -54,6 +60,7 @@ namespace Lab1
         {
             if(totalTime <= 0)
             {
+                gameoverPlayer.Play();
                 GameStop();
             }
             if(time <= 0)
@@ -78,6 +85,7 @@ namespace Lab1
                 if (moleDict.TryGetValue(currMole, out lookup) && direction.Contains(lookup))
                 {
                     score += 100 * difficulty;
+                    dohPlayer.Play();
                     listMoles[currMole].Image = null;
                 }
             }
