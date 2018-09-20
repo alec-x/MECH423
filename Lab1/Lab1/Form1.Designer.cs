@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.Timer = new System.Windows.Forms.Timer(this.components);
             this.SerialPort = new System.IO.Ports.SerialPort(this.components);
             this.TextAccelX = new System.Windows.Forms.TextBox();
@@ -72,6 +72,18 @@
             this.TextScore = new System.Windows.Forms.TextBox();
             this.LabelLevel = new System.Windows.Forms.Label();
             this.ComboLevel = new System.Windows.Forms.ComboBox();
+            this.LabelBytesToRead = new System.Windows.Forms.Label();
+            this.TextBytesToRead = new System.Windows.Forms.TextBox();
+            this.TextSerialQueueLength = new System.Windows.Forms.TextBox();
+            this.LabelSerialReadQueueLength = new System.Windows.Forms.Label();
+            this.TextxAvgList = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.TextyAvgList = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.TextzAvgList = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.LabelAvg50 = new System.Windows.Forms.Label();
+            this.TextAvg50 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.PictureLeft)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureMiddle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureRight)).BeginInit();
@@ -163,7 +175,7 @@
             // ProgressBarBuffer
             // 
             this.ProgressBarBuffer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.ProgressBarBuffer.Location = new System.Drawing.Point(254, 401);
+            this.ProgressBarBuffer.Location = new System.Drawing.Point(93, 451);
             this.ProgressBarBuffer.Maximum = 4096;
             this.ProgressBarBuffer.Name = "ProgressBarBuffer";
             this.ProgressBarBuffer.Size = new System.Drawing.Size(72, 23);
@@ -174,7 +186,7 @@
             this.LabelBuffer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.LabelBuffer.AutoSize = true;
             this.LabelBuffer.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelBuffer.Location = new System.Drawing.Point(172, 401);
+            this.LabelBuffer.Location = new System.Drawing.Point(11, 451);
             this.LabelBuffer.Name = "LabelBuffer";
             this.LabelBuffer.Size = new System.Drawing.Size(76, 22);
             this.LabelBuffer.TabIndex = 10;
@@ -185,7 +197,7 @@
             this.TextProgressBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.TextProgressBar.AutoSize = true;
             this.TextProgressBar.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TextProgressBar.Location = new System.Drawing.Point(332, 401);
+            this.TextProgressBar.Location = new System.Drawing.Point(171, 451);
             this.TextProgressBar.Name = "TextProgressBar";
             this.TextProgressBar.Size = new System.Drawing.Size(76, 22);
             this.TextProgressBar.TabIndex = 11;
@@ -197,9 +209,9 @@
             this.label2.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(225, 12);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(153, 22);
+            this.label2.Size = new System.Drawing.Size(142, 22);
             this.label2.TabIndex = 15;
-            this.label2.Text = "Avg. last 100";
+            this.label2.Text = "Max last 125";
             // 
             // TextAvgAccelZ
             // 
@@ -272,7 +284,7 @@
             // 
             // PictureLeft
             // 
-            this.PictureLeft.Location = new System.Drawing.Point(761, 108);
+            this.PictureLeft.Location = new System.Drawing.Point(1185, 108);
             this.PictureLeft.Name = "PictureLeft";
             this.PictureLeft.Size = new System.Drawing.Size(89, 85);
             this.PictureLeft.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -281,7 +293,7 @@
             // 
             // PictureMiddle
             // 
-            this.PictureMiddle.Location = new System.Drawing.Point(856, 108);
+            this.PictureMiddle.Location = new System.Drawing.Point(1280, 108);
             this.PictureMiddle.Name = "PictureMiddle";
             this.PictureMiddle.Size = new System.Drawing.Size(89, 85);
             this.PictureMiddle.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -290,7 +302,7 @@
             // 
             // PictureRight
             // 
-            this.PictureRight.Location = new System.Drawing.Point(951, 108);
+            this.PictureRight.Location = new System.Drawing.Point(1375, 108);
             this.PictureRight.Name = "PictureRight";
             this.PictureRight.Size = new System.Drawing.Size(89, 85);
             this.PictureRight.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -299,7 +311,7 @@
             // 
             // PictureUp
             // 
-            this.PictureUp.Location = new System.Drawing.Point(856, 15);
+            this.PictureUp.Location = new System.Drawing.Point(1280, 15);
             this.PictureUp.Name = "PictureUp";
             this.PictureUp.Size = new System.Drawing.Size(89, 85);
             this.PictureUp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -308,7 +320,7 @@
             // 
             // PictureDown
             // 
-            this.PictureDown.Location = new System.Drawing.Point(856, 199);
+            this.PictureDown.Location = new System.Drawing.Point(1280, 199);
             this.PictureDown.Name = "PictureDown";
             this.PictureDown.Size = new System.Drawing.Size(89, 85);
             this.PictureDown.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -318,7 +330,7 @@
             // ButtonGameStart
             // 
             this.ButtonGameStart.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F);
-            this.ButtonGameStart.Location = new System.Drawing.Point(906, 396);
+            this.ButtonGameStart.Location = new System.Drawing.Point(1330, 396);
             this.ButtonGameStart.Name = "ButtonGameStart";
             this.ButtonGameStart.Size = new System.Drawing.Size(139, 31);
             this.ButtonGameStart.TabIndex = 25;
@@ -353,28 +365,28 @@
             // 
             // ChartAcceleration
             // 
-            chartArea1.Name = "ChartAccelerationArea";
-            this.ChartAcceleration.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.ChartAcceleration.Legends.Add(legend1);
+            chartArea2.Name = "ChartAccelerationArea";
+            this.ChartAcceleration.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.ChartAcceleration.Legends.Add(legend2);
             this.ChartAcceleration.Location = new System.Drawing.Point(229, 159);
             this.ChartAcceleration.Name = "ChartAcceleration";
-            series1.ChartArea = "ChartAccelerationArea";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series1.Legend = "Legend1";
-            series1.Name = "SeriesX";
-            series2.ChartArea = "ChartAccelerationArea";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series2.Legend = "Legend1";
-            series2.Name = "SeriesY";
-            series3.ChartArea = "ChartAccelerationArea";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series3.Legend = "Legend1";
-            series3.Name = "SeriesZ";
-            this.ChartAcceleration.Series.Add(series1);
-            this.ChartAcceleration.Series.Add(series2);
-            this.ChartAcceleration.Series.Add(series3);
-            this.ChartAcceleration.Size = new System.Drawing.Size(509, 236);
+            series4.ChartArea = "ChartAccelerationArea";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series4.Legend = "Legend1";
+            series4.Name = "SeriesX";
+            series5.ChartArea = "ChartAccelerationArea";
+            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series5.Legend = "Legend1";
+            series5.Name = "SeriesY";
+            series6.ChartArea = "ChartAccelerationArea";
+            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series6.Legend = "Legend1";
+            series6.Name = "SeriesZ";
+            this.ChartAcceleration.Series.Add(series4);
+            this.ChartAcceleration.Series.Add(series5);
+            this.ChartAcceleration.Series.Add(series6);
+            this.ChartAcceleration.Size = new System.Drawing.Size(488, 236);
             this.ChartAcceleration.TabIndex = 30;
             this.ChartAcceleration.Text = "Acceleration";
             // 
@@ -401,7 +413,7 @@
             // 
             this.LabelTimer.AutoSize = true;
             this.LabelTimer.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelTimer.Location = new System.Drawing.Point(487, 111);
+            this.LabelTimer.Location = new System.Drawing.Point(911, 111);
             this.LabelTimer.Name = "LabelTimer";
             this.LabelTimer.Size = new System.Drawing.Size(65, 22);
             this.LabelTimer.TabIndex = 38;
@@ -410,7 +422,7 @@
             // TextTimer
             // 
             this.TextTimer.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TextTimer.Location = new System.Drawing.Point(557, 108);
+            this.TextTimer.Location = new System.Drawing.Point(981, 108);
             this.TextTimer.Name = "TextTimer";
             this.TextTimer.ReadOnly = true;
             this.TextTimer.Size = new System.Drawing.Size(181, 29);
@@ -420,7 +432,7 @@
             // 
             this.LabelScore.AutoSize = true;
             this.LabelScore.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelScore.Location = new System.Drawing.Point(487, 76);
+            this.LabelScore.Location = new System.Drawing.Point(911, 76);
             this.LabelScore.Name = "LabelScore";
             this.LabelScore.Size = new System.Drawing.Size(65, 22);
             this.LabelScore.TabIndex = 36;
@@ -429,7 +441,7 @@
             // TextScore
             // 
             this.TextScore.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TextScore.Location = new System.Drawing.Point(557, 73);
+            this.TextScore.Location = new System.Drawing.Point(981, 73);
             this.TextScore.Name = "TextScore";
             this.TextScore.ReadOnly = true;
             this.TextScore.Size = new System.Drawing.Size(181, 29);
@@ -439,7 +451,7 @@
             // 
             this.LabelLevel.AutoSize = true;
             this.LabelLevel.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelLevel.Location = new System.Drawing.Point(487, 41);
+            this.LabelLevel.Location = new System.Drawing.Point(911, 41);
             this.LabelLevel.Name = "LabelLevel";
             this.LabelLevel.Size = new System.Drawing.Size(65, 22);
             this.LabelLevel.TabIndex = 34;
@@ -450,16 +462,147 @@
             this.ComboLevel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ComboLevel.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F);
             this.ComboLevel.FormattingEnabled = true;
-            this.ComboLevel.Location = new System.Drawing.Point(557, 38);
+            this.ComboLevel.Location = new System.Drawing.Point(981, 38);
             this.ComboLevel.Name = "ComboLevel";
             this.ComboLevel.Size = new System.Drawing.Size(181, 29);
             this.ComboLevel.TabIndex = 39;
+            // 
+            // LabelBytesToRead
+            // 
+            this.LabelBytesToRead.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.LabelBytesToRead.AutoSize = true;
+            this.LabelBytesToRead.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LabelBytesToRead.Location = new System.Drawing.Point(843, 364);
+            this.LabelBytesToRead.Name = "LabelBytesToRead";
+            this.LabelBytesToRead.Size = new System.Drawing.Size(131, 22);
+            this.LabelBytesToRead.TabIndex = 40;
+            this.LabelBytesToRead.Text = "BytesToRead";
+            // 
+            // TextBytesToRead
+            // 
+            this.TextBytesToRead.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TextBytesToRead.Location = new System.Drawing.Point(992, 361);
+            this.TextBytesToRead.Name = "TextBytesToRead";
+            this.TextBytesToRead.ReadOnly = true;
+            this.TextBytesToRead.Size = new System.Drawing.Size(74, 29);
+            this.TextBytesToRead.TabIndex = 41;
+            // 
+            // TextSerialQueueLength
+            // 
+            this.TextSerialQueueLength.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TextSerialQueueLength.Location = new System.Drawing.Point(992, 184);
+            this.TextSerialQueueLength.Name = "TextSerialQueueLength";
+            this.TextSerialQueueLength.ReadOnly = true;
+            this.TextSerialQueueLength.Size = new System.Drawing.Size(74, 29);
+            this.TextSerialQueueLength.TabIndex = 43;
+            // 
+            // LabelSerialReadQueueLength
+            // 
+            this.LabelSerialReadQueueLength.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.LabelSerialReadQueueLength.AutoSize = true;
+            this.LabelSerialReadQueueLength.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LabelSerialReadQueueLength.Location = new System.Drawing.Point(734, 188);
+            this.LabelSerialReadQueueLength.Name = "LabelSerialReadQueueLength";
+            this.LabelSerialReadQueueLength.Size = new System.Drawing.Size(241, 22);
+            this.LabelSerialReadQueueLength.TabIndex = 42;
+            this.LabelSerialReadQueueLength.Text = "SerialReadQueueLength";
+            // 
+            // TextxAvgList
+            // 
+            this.TextxAvgList.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TextxAvgList.Location = new System.Drawing.Point(992, 230);
+            this.TextxAvgList.Name = "TextxAvgList";
+            this.TextxAvgList.ReadOnly = true;
+            this.TextxAvgList.Size = new System.Drawing.Size(74, 29);
+            this.TextxAvgList.TabIndex = 45;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(810, 234);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(164, 22);
+            this.label1.TabIndex = 44;
+            this.label1.Text = "xAvgListLength";
+            // 
+            // TextyAvgList
+            // 
+            this.TextyAvgList.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TextyAvgList.Location = new System.Drawing.Point(992, 276);
+            this.TextyAvgList.Name = "TextyAvgList";
+            this.TextyAvgList.ReadOnly = true;
+            this.TextyAvgList.Size = new System.Drawing.Size(74, 29);
+            this.TextyAvgList.TabIndex = 47;
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(810, 280);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(164, 22);
+            this.label3.TabIndex = 46;
+            this.label3.Text = "yAvgListLength";
+            // 
+            // TextzAvgList
+            // 
+            this.TextzAvgList.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TextzAvgList.Location = new System.Drawing.Point(992, 318);
+            this.TextzAvgList.Name = "TextzAvgList";
+            this.TextzAvgList.ReadOnly = true;
+            this.TextzAvgList.Size = new System.Drawing.Size(74, 29);
+            this.TextzAvgList.TabIndex = 49;
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(810, 321);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(164, 22);
+            this.label4.TabIndex = 48;
+            this.label4.Text = "zAvgListLength";
+            // 
+            // LabelAvg50
+            // 
+            this.LabelAvg50.AutoSize = true;
+            this.LabelAvg50.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LabelAvg50.Location = new System.Drawing.Point(450, 12);
+            this.LabelAvg50.Name = "LabelAvg50";
+            this.LabelAvg50.Size = new System.Drawing.Size(175, 22);
+            this.LabelAvg50.TabIndex = 53;
+            this.LabelAvg50.Text = "Avg Last 50 (g)";
+            // 
+            // TextAvg50
+            // 
+            this.TextAvg50.Font = new System.Drawing.Font("Lucida Sans Typewriter", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TextAvg50.Location = new System.Drawing.Point(454, 38);
+            this.TextAvg50.Name = "TextAvg50";
+            this.TextAvg50.ReadOnly = true;
+            this.TextAvg50.Size = new System.Drawing.Size(181, 29);
+            this.TextAvg50.TabIndex = 50;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1057, 438);
+            this.ClientSize = new System.Drawing.Size(1483, 482);
+            this.Controls.Add(this.LabelAvg50);
+            this.Controls.Add(this.TextAvg50);
+            this.Controls.Add(this.TextzAvgList);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.TextyAvgList);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.TextxAvgList);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.TextSerialQueueLength);
+            this.Controls.Add(this.LabelSerialReadQueueLength);
+            this.Controls.Add(this.TextBytesToRead);
+            this.Controls.Add(this.LabelBytesToRead);
             this.Controls.Add(this.ComboLevel);
             this.Controls.Add(this.LabelTimer);
             this.Controls.Add(this.TextTimer);
@@ -554,6 +697,18 @@
         private System.Windows.Forms.TextBox TextScore;
         private System.Windows.Forms.Label LabelLevel;
         private System.Windows.Forms.ComboBox ComboLevel;
+        private System.Windows.Forms.Label LabelBytesToRead;
+        private System.Windows.Forms.TextBox TextBytesToRead;
+        private System.Windows.Forms.TextBox TextSerialQueueLength;
+        private System.Windows.Forms.Label LabelSerialReadQueueLength;
+        private System.Windows.Forms.TextBox TextxAvgList;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox TextyAvgList;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox TextzAvgList;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label LabelAvg50;
+        private System.Windows.Forms.TextBox TextAvg50;
     }
 }
 

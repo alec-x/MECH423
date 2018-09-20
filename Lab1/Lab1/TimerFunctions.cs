@@ -56,16 +56,16 @@ namespace Lab1
                 xByte -= 124;
                 yByte -= 124;
                 zByte -= 154;
-                while (xAvgList.Count >= 100) { xAvgList.RemoveAt(0); }
-                while (yAvgList.Count >= 100) { yAvgList.RemoveAt(0); }
-                while (zAvgList.Count >= 100) { zAvgList.RemoveAt(0); }
+                while (xAvgList.Count >= 125) { xAvgList.RemoveAt(0); }
+                while (yAvgList.Count >= 125) { yAvgList.RemoveAt(0); }
+                while (zAvgList.Count >= 125) { zAvgList.RemoveAt(0); }
                 xAvgList.Add(xByte);
                 yAvgList.Add(yByte);
                 zAvgList.Add(zByte);
 
-                TextAvgAccelX.Text = xAvgList.Average().ToString();
-                TextAvgAccelY.Text = yAvgList.Average().ToString();
-                TextAvgAccelZ.Text = zAvgList.Average().ToString();
+                TextAvgAccelX.Text = xAvgList.Max().ToString();
+                TextAvgAccelY.Text = yAvgList.Max().ToString();
+                TextAvgAccelZ.Text = zAvgList.Max().ToString();
 
                 TextAccelX.Text = (xByte).ToString(); //normalized data to disclude constant error?
                 TextAccelY.Text = (yByte).ToString();
@@ -134,13 +134,13 @@ namespace Lab1
         {
             string currentDirection = "";
             int currentDirectionThreshold = 0;
-            int baseMoveThreshold = 35;
-            moveSum[" +X"] = xAvgList[99];
-            moveSum[" -X"] = xAvgList[99]; //Skip(97).Where(x => x < 0).Sum();
-            moveSum[" +Y"] = yAvgList[99];  //Skip(97).Where(y => y > 0).Sum();
-            moveSum[" -Y"] = yAvgList[99];  //Skip(97).Where(y => y < 0).Sum();
-            moveSum[" +Z"] = zAvgList[99];  //Skip(97).Where(z => z > 0).Sum();
-            moveSum[" -Z"] = zAvgList[99];  //Skip(97).Where(z => z < 0).Sum();
+            int baseMoveThreshold = 30;
+            moveSum[" +X"] = xAvgList[124];
+            moveSum[" -X"] = xAvgList[124]; //Skip(97).Where(x => x < 0).Sum();
+            moveSum[" +Y"] = yAvgList[124];  //Skip(97).Where(y => y > 0).Sum();
+            moveSum[" -Y"] = yAvgList[124];  //Skip(97).Where(y => y < 0).Sum();
+            moveSum[" +Z"] = zAvgList[124];  //Skip(97).Where(z => z > 0).Sum();
+            moveSum[" -Z"] = zAvgList[124];  //Skip(97).Where(z => z < 0).Sum();
             foreach (KeyValuePair<string, int> sum in moveSum)
             {
                 if (Math.Abs(sum.Value) > baseMoveThreshold && Math.Abs(sum.Value) > currentDirectionThreshold)
@@ -176,6 +176,21 @@ namespace Lab1
 // make switch cases for this shit
             return currentDirection;
 
+        }
+
+        private void avg50Accel()
+        {
+            double total = 0;
+            int xSquare, ySquare, zSquare;
+            for(int i = 75; i < 124; i++)
+            {
+                xSquare = (xAvgList[i] + 124) * (xAvgList[i] + 124);
+                ySquare = (yAvgList[i] + 124) * (yAvgList[i] + 124);
+                zSquare = (zAvgList[i] + 154) * (zAvgList[i] + 154);
+                total +=  Math.Sqrt(xSquare + ySquare + zSquare);
+            }
+            total = total / 9.8 / 50;
+            TextAvg50.Text = total.ToString();
         }
 
     }

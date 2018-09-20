@@ -38,10 +38,9 @@ namespace Lab1
         };
         IDictionary<string, string> moveList = new Dictionary<string, string>()
         {
-            {" +X", "Simple Punch" },
-            {" +Z +X", "High Punch" },
-            {" +X +Y +Z", "Right-Hook" },
-            {" +Z -Z, +Z", "Kame Hame Ha" }
+            {" +Y", "Go West" },
+            {" -Z +X", "Grave digger" },
+            {" +Z +X -Z", "Slam dunk" }
         };
         IDictionary<string, List<int>> orientationList = new Dictionary<string, List<int>>();
         
@@ -55,7 +54,18 @@ namespace Lab1
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            if(moveDisplay <= 0 && SerialPort.IsOpen && xAvgList.Count >99)
+            if (SerialPort.IsOpen)
+            {
+                TextBytesToRead.Text = SerialPort.BytesToRead.ToString();
+                TextxAvgList.Text = xAvgList.Count.ToString();
+                TextyAvgList.Text = yAvgList.Count.ToString();
+                TextzAvgList.Text = zAvgList.Count.ToString();
+                TextSerialQueueLength.Text = serialReadQueue.Count.ToString();
+            }
+
+
+
+            if (moveDisplay <= 0 && SerialPort.IsOpen && xAvgList.Count >124)
             {
                 TextMovePerformed.Text = "";
                 if (moveTimer >= 2000 || !moveTrigger)
@@ -80,6 +90,7 @@ namespace Lab1
                 if(currentDirection != "")
                 {
                     delay = 200;
+                    moveTimer = 1000;
                 }
                 comboList += currentDirection;
                 
@@ -104,7 +115,12 @@ namespace Lab1
             currentDirection = ""; //put current direction here so gameloop could piggyback
             updateBufferBar();
             readBuffer();
-            updateChart();
+            if(xAvgList.Count > 124)
+            {
+                updateChart();
+                avg50Accel();              
+            }
+
             TextBoardOrientation.Text = GetOrientation();
 
         }
@@ -159,18 +175,15 @@ namespace Lab1
                 }
                 else
                 {
+                    SerialPort.PortName = ComboPortList.Text;
                     SerialPort.Open();
                     ButtonConnect.Text = "Disconnect";
                     Console.WriteLine(String.Format("Connected to serial port {0}", SerialPort.PortName));
                 }
             }
-            catch (System.IO.IOException)
-            {
-                Console.WriteLine("Error connecting to port, try reselecting the port in the drop down menu");
-            }
             catch
             {
-                Console.WriteLine("No clue what happened, not a System.IO.IOException");
+                Console.WriteLine("Error connecting to port, try reselecting the port in the drop down menu");
             }
         }
 
