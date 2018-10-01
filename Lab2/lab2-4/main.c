@@ -47,10 +47,11 @@ __interrupt void USCI_A0_ISR(void)
 {
     unsigned char RxByte = 0;
     RxByte = UCA0RXBUF;
+
     while(!(UCA0IFG & UCTXIFG)); //if currently transmitting, then loop on itself
-
-
     UCA0TXBUF = RxByte; //echo back the received byte
+
+    while(!(UCA0IFG & UCTXIFG)); //if currently transmitting, then loop on itself
     UCA0TXBUF = RxByte + 1;
 
     if (RxByte == 'j'){

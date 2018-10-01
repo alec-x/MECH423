@@ -2,8 +2,7 @@
 
 int main(void)
 {
-	WDTCTL = WDTPW | WDTHOLD;	// stop watchdog timer
-	  WDTCTL = WDTPW + WDTHOLD;            // Stop WDT
+	  WDTCTL = WDTPW | WDTHOLD;	// stop watchdog timer
 	  CSCTL0_H = 0xA5;
 	  CSCTL1 |= DCOFSEL0 + DCOFSEL1;       // Set max. DCO setting =8MHz
 	  CSCTL2 = SELA_3 + SELS_3 + SELM_3;   // set ACLK = SMCLK = MCLK = DCO/8
