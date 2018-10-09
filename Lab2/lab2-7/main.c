@@ -35,7 +35,7 @@ int main(void)
     UCA0BRW = 52;
 	
 	//Configure ADC
-    ADC10CTL0 = ADC10SHT_2 + ADC10ON;                         // 4ADCclks, ADC ON
+    ADC10CTL0 = ADC10SHT_2 + ADC10ON;                         // 16ADCclks, ADC ON
     ADC10CTL1 = ADC10CONSEQ_0 + ADC10SHP + ADC10SSEL_1;       // multiple channel single sequence
     ADC10CTL2 |= ADC10RES;                                    // 10-bit resolution, shift when read
     ADC10MCTL0 |= ADC10INCH_12; //start with channel 12, x
@@ -45,8 +45,8 @@ int main(void)
 
     while(1)
     {
-        while (ADC10CTL1 & BUSY);               // Wait if ADC10 core is active
         ADC10CTL0 |= ADC10ENC + ADC10SC;        // Start sampling
+        while (ADC10CTL1 & BUSY);               // Wait if ADC10 core is active
 
         if(counter == 0){
              xAccel = ADC10MEM0 >> 2;

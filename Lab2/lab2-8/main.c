@@ -1,93 +1,39 @@
 #include <msp430.h>
+volatile long intDeg; //in celsius
 
-volatile unsigned char x;
-volatile unsigned char y;
-volatile unsigned char z;
-
-/**
- * main.c
- */
 int main(void)
 {
-    WDTCTL = WDTPW | WDTHOLD;   // Stop WD Timer
+  WDTCTL = WDTPW + WDTHOLD;                 // Stop WDT
 
-	// Power accelerometer
-    P2DIR |= BIT7; // configure P2 to be output
-    P2OUT |= BIT7; // configure P2 output to be high
+  // Configure ADC10 - Pulse sample mode; ADC10SC trigger
+  ADC10CTL0 = ADC10SHT_8 + ADC10ON;         // 16 ADC10CLKs; ADC ON,temperature sample period>30us
+  ADC10CTL1 = ADC10SHP + ADC10CONSEQ_0;     // s/w trig, single ch/conv
+  ADC10CTL2 = ADC10RES;                     // 10-bit conversion results
+  ADC10MCTL0 = ADC10SREF_1 + ADC10INCH_10;  // ADC input ch A10 => temp sense
 
-	// set DCO clock to 1MHz, assign to all clocks
-    CSCTL0_H = 0xA5;                                            // Unlock Clocks
-    CSCTL1 = DCOFSEL0 + DCOFSEL1;                               // Set DCO to 8 MHz
-    CSCTL2 = SELM__DCOCLK + SELA__DCOCLK + SELS__DCOCLK;        // Set all clocks to src DCO
-	
-    TB1CCR0 = 5000 - 1;
-    TB1CCTL1 = CCIE;
-    TB1CTL = TBSSEL__SMCLK + MC__UP + ID__8;
-    TB0EX0 = TBIDEX__8;
-    TB1CTL |= TBCLR;
+  // Configure internal reference
+  while(REFCTL0 & REFGENBUSY);              // If ref generator busy, WAIT
+  REFCTL0 |= REFVSEL_0+REFON;               // Select internal ref = 1.5V
+                                            // Internal Reference ON
+  ADC10IE |=ADC10IE0;                       // enable the Interrupt request for a completed ADC10_B conversion
 
-	//Configure A12-14 as Analog in
-	P3SEL0 |= BIT0 + BIT1 + BIT2; // X Y Z
-    P3SEL1 |= BIT0 + BIT1 + BIT2;
-	
-	//Configure UART
-    P2SEL0 &= ~(BIT0 + BIT1);                                   //Config. UART Port
-    P2SEL1 |= BIT0 + BIT1;
-    UCA0CTLW0 = UCSSEL0;                                        // ACLK src, also UART is enabled
-    UCA0MCTLW = 0x4900 + UCOS16 + UCBRF0;                       // Table 18-5 Data Sheet, p. 491
-    UCA0BRW = 52;
-
-	//Configure ADC
-    ADC10CTL0 |= ADC10ON;                   // Turn on
-    ADC10CTL1 |= ADC10SHP  + ADC10CONSEQ_0; // From sampling timer
-    ADC10CTL2 |= ADC10RES;                  // Set incoming res. to 10 bits
-    _EINT();
-
-    while(1){
-
-        // x
-        ADC10CTL0 &= ~(ADC10ENC + ADC10SC); // Disable conversion to set new channel
-        ADC10MCTL0 = ADC10INCH_12;         // Turn on x-channel (A12)
-        ADC10CTL0 |= ADC10ENC + ADC10SC;    // Enable and start
-        while(ADC10CTL1 & ADC10BUSY);
-
-        x = ADC10MEM0 >> 2;                 // Bitshift right by 2
-        _NOP();
+  __delay_cycles(400);                      // Delay for Ref to settle
 
 
-        // y
-        ADC10CTL0 &= ~(ADC10ENC + ADC10SC); // Disable conversion to set new channel
-        ADC10MCTL0 = ADC10INCH_13;         // Turn on y-channel (A13)
-        ADC10CTL0 |= ADC10ENC + ADC10SC;    // Enable and start
-        while(ADC10CTL1 & ADC10BUSY);
+  while(1)
+  {
+    ADC10CTL0 |= ADC10ENC + ADC10SC;        // Sampling and conversion start
 
-        y = ADC10MEM0 >> 2;                 // Bitshift right by 2
-        _NOP();
+    __bis_SR_register(LPM4_bits + GIE);     // LPM4 with interrupts enabled
+    __no_operation();
 
-
-        // z
-        ADC10CTL0 &= ~(ADC10ENC + ADC10SC); // Disable conversion to set new channel
-        ADC10MCTL0 = ADC10INCH_14;         // Turn on z-channel (A14)
-        ADC10CTL0 |= ADC10ENC + ADC10SC;    // Enable and start
-        while(ADC10CTL1 & ADC10BUSY);
-
-        z = ADC10MEM0 >> 2;                 // Bitshift right by 2
-        _NOP();
-    }
-
-    return 0;
+  }
 }
 
-#pragma vector = TIMER1_B1_VECTOR
-__interrupt void TIMER1_B1_ISR(void){
-    while(!(UCA0IFG & UCTXIFG));
-    UCA0TXBUF = 255;
-    while(!(UCA0IFG & UCTXIFG));
-    UCA0TXBUF = x;
-    while(!(UCA0IFG & UCTXIFG));
-    UCA0TXBUF = y;
-    while(!(UCA0IFG & UCTXIFG));
-    UCA0TXBUF = z;
-    _NOP();
-    TB1CCTL1 ^= CCIFG;
+// ADC10 interrupt service routine
+#pragma vector = ADC10_VECTOR
+__interrupt void ADC_ISR(void)
+{
+    intDeg = ADC10MEM0;
 }
+
