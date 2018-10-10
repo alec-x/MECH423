@@ -1,7 +1,7 @@
 #include <msp430.h> 
 
 volatile unsigned char tempVolt = 0;
-const int base = 97;
+const int base = 58;
 
 int main(void)
 {

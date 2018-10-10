@@ -9,6 +9,8 @@ volatile unsigned int currSize = 0;
 volatile unsigned int last = 0;
 volatile unsigned int curr = 0;
 char queue[50];
+char errfull[] = "BUFFER FULL\n\r";
+char errempty[] = "BUFFER EMPTY\n\r";
 
 int main(void)
 {
@@ -40,6 +42,7 @@ int main(void)
 __interrupt void USCI_A0_ISR(void)
 {
     unsigned char RxByte = 0;
+    int i = 0;
     RxByte = UCA0RXBUF;
 
     if(RxByte == 13 && currSize > 0){
@@ -63,6 +66,17 @@ __interrupt void USCI_A0_ISR(void)
             curr++;
         }
         currSize += 1;
+    } else if(currSize > queueSize - 1){
+        for(i = 0; i < sizeof(errfull); i++){
+            while(!(UCA0IFG & UCTXIFG)); //if currently transmitting, then loop on itself
+            UCA0TXBUF = errfull[i]; //echo back the received byte
+        }
+
+    } else if(currSize == 0){
+        for(i = 0; i < sizeof(errempty); i++){
+            while(!(UCA0IFG & UCTXIFG)); //if currently transmitting, then loop on itself
+            UCA0TXBUF = errempty[i]; //echo back the received byte
+        }
     }
 
 
