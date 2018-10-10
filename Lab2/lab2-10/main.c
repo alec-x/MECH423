@@ -20,7 +20,7 @@ int main(void)
     CSCTL2 = SELM0 + SELM1 + SELA0 + SELA1 + SELS0 + SELS1;
 
     //Configure LED
-    PJDIR |= BIT0;
+    PJDIR |= BIT0 + BIT1 + BIT2;
 
     //Configure ports to be UART
     P2SEL0 &= ~(BIT0 + BIT1);
@@ -117,9 +117,15 @@ int main(void)
             freqInt |= dataByte1 << 8;
             freqInt += dataByte2;
             TB1CCR1 = freqInt;
-        } else {
+        } else if(commandByte == 1){
             PJOUT ^= BIT0;
+        } else if(commandByte == 2){
+            PJOUT ^= BIT1;
+        } else if(commandByte == 3){
+            PJOUT ^= BIT2;
         }
+
+
 
     }
 
