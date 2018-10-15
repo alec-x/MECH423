@@ -114,9 +114,12 @@ int main(void)
                 dataByte2 = 255;
             }
 
-            freqInt |= dataByte1 << 8;
-            freqInt += dataByte2;
-            TB1CCR1 = freqInt;
+            freqInt |= dataByte2 << 8;
+            freqInt = dataByte1 << 8;
+            if(freqInt < 16000){
+                TB1CCR1 = freqInt;
+            }
+
         } else if(commandByte == 1){
             PJOUT ^= BIT0;
         } else if(commandByte == 2){
