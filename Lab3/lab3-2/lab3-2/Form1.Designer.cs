@@ -36,9 +36,9 @@
             this.sendButton = new System.Windows.Forms.Button();
             this.baudRateText = new System.Windows.Forms.TextBox();
             this.baudRateLabel = new System.Windows.Forms.Label();
-            this.duty2Text = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.duty1Text = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.duty2Text = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.directionText = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -84,8 +84,10 @@
             this.headerText.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.headerText.Location = new System.Drawing.Point(12, 86);
             this.headerText.Name = "headerText";
+            this.headerText.ReadOnly = true;
             this.headerText.Size = new System.Drawing.Size(196, 32);
             this.headerText.TabIndex = 4;
+            this.headerText.Text = "255";
             // 
             // sendButton
             // 
@@ -117,13 +119,14 @@
             this.baudRateLabel.TabIndex = 7;
             this.baudRateLabel.Text = "Baud Rate:";
             // 
-            // duty2Text
+            // duty1Text
             // 
-            this.duty2Text.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.duty2Text.Location = new System.Drawing.Point(214, 86);
-            this.duty2Text.Name = "duty2Text";
-            this.duty2Text.Size = new System.Drawing.Size(196, 32);
-            this.duty2Text.TabIndex = 9;
+            this.duty1Text.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.duty1Text.Location = new System.Drawing.Point(214, 86);
+            this.duty1Text.Name = "duty1Text";
+            this.duty1Text.Size = new System.Drawing.Size(196, 32);
+            this.duty1Text.TabIndex = 9;
+            this.duty1Text.TextChanged += new System.EventHandler(this.duty1Text_TextChanged);
             // 
             // label1
             // 
@@ -135,13 +138,14 @@
             this.label1.TabIndex = 8;
             this.label1.Text = "Duty Cycle Byte 1";
             // 
-            // duty1Text
+            // duty2Text
             // 
-            this.duty1Text.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.duty1Text.Location = new System.Drawing.Point(416, 86);
-            this.duty1Text.Name = "duty1Text";
-            this.duty1Text.Size = new System.Drawing.Size(196, 32);
-            this.duty1Text.TabIndex = 11;
+            this.duty2Text.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.duty2Text.Location = new System.Drawing.Point(416, 86);
+            this.duty2Text.Name = "duty2Text";
+            this.duty2Text.Size = new System.Drawing.Size(196, 32);
+            this.duty2Text.TabIndex = 11;
+            this.duty2Text.TextChanged += new System.EventHandler(this.duty2Text_TextChanged);
             // 
             // label2
             // 
@@ -160,6 +164,7 @@
             this.directionText.Name = "directionText";
             this.directionText.Size = new System.Drawing.Size(196, 32);
             this.directionText.TabIndex = 13;
+            this.directionText.TextChanged += new System.EventHandler(this.directionText_TextChanged);
             // 
             // label3
             // 
@@ -178,6 +183,7 @@
             this.escapeText.Name = "escapeText";
             this.escapeText.Size = new System.Drawing.Size(196, 32);
             this.escapeText.TabIndex = 15;
+            this.escapeText.TextChanged += new System.EventHandler(this.escapeText_TextChanged);
             // 
             // label4
             // 
@@ -198,9 +204,9 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.directionText);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.duty1Text);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.duty2Text);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.duty1Text);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.baudRateLabel);
             this.Controls.Add(this.baudRateText);
@@ -224,9 +230,9 @@
         private System.Windows.Forms.Button sendButton;
         private System.Windows.Forms.TextBox baudRateText;
         private System.Windows.Forms.Label baudRateLabel;
-        private System.Windows.Forms.TextBox duty2Text;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox duty1Text;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox duty2Text;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox escapeText;

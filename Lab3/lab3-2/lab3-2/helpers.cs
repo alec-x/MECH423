@@ -74,11 +74,28 @@ namespace lab3_2
 
         private void sendBytes()
         {
-            byte[] TxBytes = new Byte[5];
-            for (int i = 0; i < 5; i++)
+            try
             {
-                TxBytes[i] = Convert.ToByte(duty1Text.Text);
+                if (duty2Text.Text != "" && duty1Text.Text != "" &&
+                    directionText.Text != "" && escapeText.Text != "")
+                {
+                    TxBytes[0] = Convert.ToByte(255);
+                    TxBytes[1] = Convert.ToByte(duty2Text.Text);
+                    TxBytes[2] = Convert.ToByte(duty1Text.Text);
+                    TxBytes[3] = Convert.ToByte(directionText.Text);
+                    TxBytes[4] = Convert.ToByte(escapeText.Text);
+                }
+                for (int i = 0; i < 5; i++)
+                {
+                    serialPort.Write(TxBytes, i, 1);
+                }
             }
+            catch (Exception exception)
+            {
+                Console.WriteLine("Could not send bytes");
+                Console.WriteLine(exception.Message);
+            }
+
         }
     }
 }

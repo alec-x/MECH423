@@ -40,7 +40,43 @@ namespace lab3_2
 
         private void sendButton_Click(object sender, EventArgs e)
         {
+            sendBytes();
+        }
 
+        private void duty1Text_TextChanged(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(duty1Text.Text, "[^0-9]"))
+            {
+                Console.WriteLine("Please enter only numbers.");
+                duty1Text.Text = duty1Text.Text.Remove(duty1Text.Text.Length - 1);
+            }
+        }
+
+        private void duty2Text_TextChanged(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(duty2Text.Text, "[^0-9]"))
+            {
+                Console.WriteLine("Please enter only numbers.");
+                duty2Text.Text = duty2Text.Text.Remove(duty2Text.Text.Length - 1);
+            }
+        }
+
+        private void directionText_TextChanged(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(directionText.Text, "[^0-9]"))
+            {
+                Console.WriteLine("Please enter only numbers.");
+                directionText.Text = directionText.Text.Remove(directionText.Text.Length - 1);
+            }
+        }
+
+        private void escapeText_TextChanged(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(escapeText.Text, "[^0-9]"))
+            {
+                Console.WriteLine("Please enter only numbers.");
+                escapeText.Text = escapeText.Text.Remove(escapeText.Text.Length - 1);
+            }
         }
     }
 }
