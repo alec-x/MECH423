@@ -80,8 +80,8 @@ namespace lab3_2
                     directionText.Text != "" && escapeText.Text != "")
                 {
                     TxBytes[0] = Convert.ToByte(255);
-                    TxBytes[1] = Convert.ToByte(duty2Text.Text);
-                    TxBytes[2] = Convert.ToByte(duty1Text.Text);
+                    TxBytes[1] = Convert.ToByte(duty1Text.Text);
+                    TxBytes[2] = Convert.ToByte(duty2Text.Text);
                     TxBytes[3] = Convert.ToByte(directionText.Text);
                     TxBytes[4] = Convert.ToByte(escapeText.Text);
                 }

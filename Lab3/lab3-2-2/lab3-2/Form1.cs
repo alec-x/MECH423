@@ -63,9 +63,9 @@ namespace lab3_2
 
         private void directionText_TextChanged(object sender, EventArgs e)
         {
-            if (System.Text.RegularExpressions.Regex.IsMatch(directionText.Text, "[^0-9]"))
+            if (System.Text.RegularExpressions.Regex.IsMatch(directionText.Text, "[^0-1]"))
             {
-                Console.WriteLine("Please enter only numbers.");
+                Console.WriteLine("Please enter only binary.");
                 directionText.Text = directionText.Text.Remove(directionText.Text.Length - 1);
             }
         }
