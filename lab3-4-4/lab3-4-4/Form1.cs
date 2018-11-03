@@ -14,20 +14,24 @@ namespace lab3_4_4
     public partial class Form1 : Form
     {
         long timeCounter = 0; //use stopwatch?
+        Int32 totalPos = 0;
         Stopwatch stopWatch;
         ConcurrentQueue<int> dataBuffer = new ConcurrentQueue<int>();
-        List<int> averagePos = new List<int>(); //150 points long
-
-        
+        List<int> averagePos = new List<int>(); //100 points long
+        List<double> velocity = new List<double>(); //100 points long
         //ConcurrentQueue<int> encoderDown = new ConcurrentQueue<int>();
         public Form1()
         {
             InitializeComponent();
+            speedChart.Series["encoderPosition"].Points.DataBindY(averagePos);
+            speedChart.Series["motorSpeed"].Points.DataBindY(velocity);
+
         }
 
         private void connectButton_Click(object sender, EventArgs e)
         {
             toggleConnect();
+            
         }
 
         private void comCombo_SelectedIndexChanged(object sender, EventArgs e)
@@ -57,8 +61,11 @@ namespace lab3_4_4
             readSerialBuffer();
             stopWatch.Stop();
             timeCounter = stopWatch.ElapsedMilliseconds;
+            stopWatch.Reset();
             stopWatch.Start();
-
+            updateSpeed();
+            speedChart.Series["encoderPosition"].Points.DataBindY(averagePos);
+            speedChart.Series["motorSpeed"].Points.DataBindY(velocity);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -70,5 +77,7 @@ namespace lab3_4_4
         {
             readSerial();
         }
+
     }
+
 }

@@ -82,22 +82,34 @@ namespace lab3_4_4
                 dataBuffer.Enqueue(newByte);
             }
         }
+
         private void readSerialBuffer()
         {
             int firstByte = 0;
             int encoderUp, encoderDown;
+            bool continueRead = true;
             int up1, up0, down1, down0, escape;
             while (firstByte != 255 && !dataBuffer.IsEmpty)
             {
                 dataBuffer.TryDequeue(out firstByte);
             }
-            while (dataBuffer.Count >= 4 && firstByte == 255)
+            while (dataBuffer.Count >= 5 && firstByte == 255 && continueRead)
             {
                 dataBuffer.TryDequeue(out up1);
                 dataBuffer.TryDequeue(out up0);
                 dataBuffer.TryDequeue(out down1);
                 dataBuffer.TryDequeue(out down0);
                 dataBuffer.TryDequeue(out escape);
+                if (dataBuffer.Count >= 6)
+                {
+                    dataBuffer.TryDequeue(out firstByte);
+                    continueRead = true;
+                }
+                else
+                {
+                    continueRead = false;
+                }
+
                 if ((escape & 1) == 1)
                 {
                     up1 = 255;
@@ -116,18 +128,43 @@ namespace lab3_4_4
                 }
                 encoderUp = (up1 << 8) + up0;
                 encoderDown = (down1 << 8) + down0;
-                while (averagePos.Count >= 150)
+                while (averagePos.Count >= 100)
                 {
                     averagePos.RemoveAt(0);
                 }
                 averagePos.Add(encoderUp - encoderDown);
-                chart1.Series[0].Points.DataBindY(averagePos);
+                totalPos += (Int32)encoderUp - (Int32)encoderDown;
+                if(totalPos >= 400)
+                {
+                    totalPos = totalPos % 400;
+                }
+                if(totalPos < 0)
+                {
+                    totalPos = totalPos % 400;
+                }
+                //chart1.Series[0].Points.DataBindY(averagePos);
             }
         }
+
         private void updateSpeed()
         {
-            // 1000 for ms to s, 1440 for window count to rotation
-            speedText.Text = (1000*(double)averagePos.Sum()/timeCounter / 1440).ToString();
+            // 1000 for ms to s, 400 for window count to rotation
+            try
+            {
+                double currVelocity = 1000 * (double)averagePos.GetRange(94, 6).Sum() / timeCounter / 400;
+                while (velocity.Count >= 100)
+                {
+                    velocity.RemoveAt(0);
+                }
+                velocity.Add(currVelocity);
+                speedText.Text = currVelocity.ToString();
+                positionText.Text = totalPos.ToString();
+            }
+            catch
+            {
+                speedText.Text = "INITIALIZING";
+                positionText.Text = "INITIALIZING";
+            }
         }
     }
 }
