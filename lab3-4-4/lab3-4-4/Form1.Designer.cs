@@ -29,21 +29,23 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.serialPort = new System.IO.Ports.SerialPort(this.components);
             this.speedChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.positionLabel = new System.Windows.Forms.Label();
-            this.speedLabel = new System.Windows.Forms.Label();
+            this.speedRPMLabel = new System.Windows.Forms.Label();
             this.baudRateLabel = new System.Windows.Forms.Label();
             this.baudRateText = new System.Windows.Forms.TextBox();
             this.comCombo = new System.Windows.Forms.ComboBox();
             this.connectButton = new System.Windows.Forms.Button();
             this.positionText = new System.Windows.Forms.TextBox();
-            this.speedText = new System.Windows.Forms.TextBox();
+            this.speedRPMText = new System.Windows.Forms.TextBox();
             this.timer = new System.Windows.Forms.Timer(this.components);
+            this.speedHzText = new System.Windows.Forms.TextBox();
+            this.speedHzLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.speedChart)).BeginInit();
             this.SuspendLayout();
             // 
@@ -53,27 +55,27 @@
             // 
             // speedChart
             // 
-            chartArea1.AxisY.Crossing = 0D;
-            chartArea1.AxisY.IsStartedFromZero = false;
-            chartArea1.AxisY2.Crossing = 0D;
-            chartArea1.AxisY2.IsStartedFromZero = false;
-            chartArea1.Name = "ChartArea1";
-            this.speedChart.ChartAreas.Add(chartArea1);
-            legend1.DockedToChartArea = "ChartArea1";
-            legend1.Name = "Legend1";
-            this.speedChart.Legends.Add(legend1);
+            chartArea2.AxisY.Crossing = 0D;
+            chartArea2.AxisY.IsStartedFromZero = false;
+            chartArea2.AxisY2.Crossing = 0D;
+            chartArea2.AxisY2.IsStartedFromZero = false;
+            chartArea2.Name = "ChartArea1";
+            this.speedChart.ChartAreas.Add(chartArea2);
+            legend2.DockedToChartArea = "ChartArea1";
+            legend2.Name = "Legend1";
+            this.speedChart.Legends.Add(legend2);
             this.speedChart.Location = new System.Drawing.Point(12, 72);
             this.speedChart.Name = "speedChart";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "encoderPosition";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series2.Legend = "Legend1";
-            series2.Name = "motorSpeed";
-            series2.YAxisType = System.Windows.Forms.DataVisualization.Charting.AxisType.Secondary;
-            this.speedChart.Series.Add(series1);
-            this.speedChart.Series.Add(series2);
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "encoderPosition";
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series4.Legend = "Legend1";
+            series4.Name = "motorSpeed";
+            series4.YAxisType = System.Windows.Forms.DataVisualization.Charting.AxisType.Secondary;
+            this.speedChart.Series.Add(series3);
+            this.speedChart.Series.Add(series4);
             this.speedChart.Size = new System.Drawing.Size(536, 392);
             this.speedChart.TabIndex = 0;
             this.speedChart.Text = "speedChart";
@@ -88,15 +90,15 @@
             this.positionLabel.TabIndex = 1;
             this.positionLabel.Text = "Encoder Position:";
             // 
-            // speedLabel
+            // speedRPMLabel
             // 
-            this.speedLabel.AutoSize = true;
-            this.speedLabel.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F);
-            this.speedLabel.Location = new System.Drawing.Point(554, 137);
-            this.speedLabel.Name = "speedLabel";
-            this.speedLabel.Size = new System.Drawing.Size(162, 26);
-            this.speedLabel.TabIndex = 2;
-            this.speedLabel.Text = "Encoder Speed";
+            this.speedRPMLabel.AutoSize = true;
+            this.speedRPMLabel.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F);
+            this.speedRPMLabel.Location = new System.Drawing.Point(554, 137);
+            this.speedRPMLabel.Name = "speedRPMLabel";
+            this.speedRPMLabel.Size = new System.Drawing.Size(230, 26);
+            this.speedRPMLabel.TabIndex = 2;
+            this.speedRPMLabel.Text = "Encoder Speed (RPM)";
             // 
             // baudRateLabel
             // 
@@ -147,13 +149,13 @@
             this.positionText.Size = new System.Drawing.Size(183, 32);
             this.positionText.TabIndex = 12;
             // 
-            // speedText
+            // speedRPMText
             // 
-            this.speedText.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.speedText.Location = new System.Drawing.Point(559, 166);
-            this.speedText.Name = "speedText";
-            this.speedText.Size = new System.Drawing.Size(183, 32);
-            this.speedText.TabIndex = 13;
+            this.speedRPMText.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.speedRPMText.Location = new System.Drawing.Point(559, 166);
+            this.speedRPMText.Name = "speedRPMText";
+            this.speedRPMText.Size = new System.Drawing.Size(183, 32);
+            this.speedRPMText.TabIndex = 13;
             // 
             // timer
             // 
@@ -161,18 +163,38 @@
             this.timer.Interval = 50;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
+            // speedHzText
+            // 
+            this.speedHzText.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.speedHzText.Location = new System.Drawing.Point(559, 244);
+            this.speedHzText.Name = "speedHzText";
+            this.speedHzText.Size = new System.Drawing.Size(183, 32);
+            this.speedHzText.TabIndex = 15;
+            // 
+            // speedHzLabel
+            // 
+            this.speedHzLabel.AutoSize = true;
+            this.speedHzLabel.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F);
+            this.speedHzLabel.Location = new System.Drawing.Point(554, 215);
+            this.speedHzLabel.Name = "speedHzLabel";
+            this.speedHzLabel.Size = new System.Drawing.Size(213, 26);
+            this.speedHzLabel.TabIndex = 14;
+            this.speedHzLabel.Text = "Encoder Speed (Hz)";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 476);
-            this.Controls.Add(this.speedText);
+            this.Controls.Add(this.speedHzText);
+            this.Controls.Add(this.speedHzLabel);
+            this.Controls.Add(this.speedRPMText);
             this.Controls.Add(this.positionText);
             this.Controls.Add(this.baudRateLabel);
             this.Controls.Add(this.baudRateText);
             this.Controls.Add(this.comCombo);
             this.Controls.Add(this.connectButton);
-            this.Controls.Add(this.speedLabel);
+            this.Controls.Add(this.speedRPMLabel);
             this.Controls.Add(this.positionLabel);
             this.Controls.Add(this.speedChart);
             this.Name = "Form1";
@@ -190,14 +212,16 @@
         private System.IO.Ports.SerialPort serialPort;
         private System.Windows.Forms.DataVisualization.Charting.Chart speedChart;
         private System.Windows.Forms.Label positionLabel;
-        private System.Windows.Forms.Label speedLabel;
+        private System.Windows.Forms.Label speedRPMLabel;
         private System.Windows.Forms.Label baudRateLabel;
         private System.Windows.Forms.TextBox baudRateText;
         private System.Windows.Forms.ComboBox comCombo;
         private System.Windows.Forms.Button connectButton;
         private System.Windows.Forms.TextBox positionText;
-        private System.Windows.Forms.TextBox speedText;
+        private System.Windows.Forms.TextBox speedRPMText;
         private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.TextBox speedHzText;
+        private System.Windows.Forms.Label speedHzLabel;
     }
 }
 

@@ -151,18 +151,21 @@ namespace lab3_4_4
             // 1000 for ms to s, 400 for window count to rotation
             try
             {
-                double currVelocity = 1000 * (double)averagePos.GetRange(94, 6).Sum() / timeCounter / 400;
+                // 60sec/min * 1000ms/s / 400count/rotation / 6datapoints-averaged = 25 
+                double currVelocity = 25 * (double)averagePos.GetRange(94, 6).Sum() / timeCounter ;
                 while (velocity.Count >= 100)
                 {
                     velocity.RemoveAt(0);
                 }
                 velocity.Add(currVelocity);
-                speedText.Text = currVelocity.ToString();
+                speedRPMText.Text = currVelocity.ToString();
+                //  / 60 * 2 * 3.1416 for RPM to rad
+                speedHzText.Text = (0.10472*currVelocity).ToString();
                 positionText.Text = totalPos.ToString();
             }
             catch
             {
-                speedText.Text = "INITIALIZING";
+                speedRPMText.Text = "INITIALIZING";
                 positionText.Text = "INITIALIZING";
             }
         }
