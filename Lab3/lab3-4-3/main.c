@@ -38,7 +38,7 @@ int main(void)
     //Configure timer interrupt
     TB0CTL = TBSSEL_1 + MC_1 + ID_3;      // use ACLKC
     TB0CCTL0 = CCIE;               // count to TA0CCR0, enable interrupt
-    TB0CCR0 = 40000;               // PWM Period clock = 8MHz, desired freq 25Hz, factor 40000 * 8 (in TA0CTL)
+    TB0CCR0 = 50000;               // PWM Period clock = 8MHz, desired freq 25Hz, factor 40000 * 8 (in TA0CTL)
 
 
 
