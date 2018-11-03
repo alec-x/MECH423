@@ -76,6 +76,7 @@ namespace lab3_2
         {
             try
             {
+                int n;
                 if (duty2Text.Text != "" && duty1Text.Text != "" &&
                     directionText.Text != "" && escapeText.Text != "")
                 {
@@ -84,10 +85,16 @@ namespace lab3_2
                     TxBytes[2] = Convert.ToByte(duty2Text.Text);
                     TxBytes[3] = Convert.ToByte(directionText.Text);
                     TxBytes[4] = Convert.ToByte(escapeText.Text);
+                    TxBytes[5] = Convert.ToByte(modeText.Text);
                 }
+
                 for (int i = 0; i < 5; i++)
                 {
                     serialPort.Write(TxBytes, i, 1);
+                }
+                if (part3Check.Checked)
+                {
+                    serialPort.Write(TxBytes, 5, 1);
                 }
             }
             catch (Exception exception)

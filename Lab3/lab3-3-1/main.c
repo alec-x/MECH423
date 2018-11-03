@@ -9,8 +9,35 @@ volatile unsigned int currSize = 0;
 volatile unsigned int last = 0;
 volatile unsigned int curr = 0;
 char queue[50];
-unsigned int freqInt;
-char dataByte1, dataByte2, directionByte, escapeByte;
+unsigned int order = 0;
+char dataByte1, dataByte2, directionByte, escapeByte, modeByte;
+//1 left, 3 up, 5 right, 7 down, 8 down left
+// for wire configuration:
+// starting from edge, black(1) brown(3) orange(2) yellow(4)
+static const unsigned int directionTableA[8] =
+{
+    BIT4,
+    BIT4,
+    0,
+    BIT5,
+    BIT5,
+    BIT5,
+    0,
+    BIT4
+
+};
+
+static const unsigned int directionTableB[8] =
+{
+    0,
+    BIT4,
+    BIT4,
+    BIT4,
+    0,
+    BIT5,
+    BIT5,
+    BIT5
+};
 
 int main(void)
 {
@@ -23,34 +50,27 @@ int main(void)
     PJDIR |= BIT0 + BIT1 + BIT2;
 
     //Configure ports to be UART
-    P2SEL0 &= ~(BIT0 + BIT1);
-    P2SEL1 |= BIT0 + BIT1;
+    P2SEL0 &= ~(BIT5 + BIT6);
+    P2SEL1 |= BIT5 + BIT6;
 
-    //Configure UART 0
-    UCA0CTLW0 = UCSSEL0; // clock for UART comes from ACLK, also UART is enabled
-    UCA0MCTLW = 0xF700 + UCOS16 + UCBRF0;
-    UCA0BRW = 52;
-    UCA0IE |= UCRXIE;
+    //Configure UART 1
+    UCA1CTLW0 = UCSSEL0; // clock for UART comes from ACLK, also UART is enabled
+    UCA1MCTLW = 0x4900 + UCOS16 + UCBRF0; //4900 F700
+    UCA1BRW = 52;
+    UCA1IE |= UCRXIE;
+
+    //Configure timer interrupt
+    TA0CTL = TASSEL_1 + MC_1 + ID_3;      // use ACLKC
+    TA0EX0 = TAIDEX_7;
+    TA0CCTL0 |= CCIE;               // count to TA0CCR0, enable interrupt
+    TA0CCR0 = 50000;               // PWM Period clock = 250kHz, desired freq 5Hz, factor 25000 * 8 (in TA0CTL)
 
     _EINT(); //global interrupt enable
 
-    //Configure Duty cycle (B1 and B2)
-    P3DIR |= BIT4 + BIT5;                       // P3.4, 3.5 output
-    P3SEL0 |= BIT4 + BIT5;                      // P3.4, 3.5 options select
-    TB1CCTL1 = OUTMOD_7;                 // CCR1 reset/set
-    TB1CCTL2 = OUTMOD_7;                 // CCR1 reset/set
-    TB1CCR1 = 100;                      // CCR1 PWM duty cycle, PWM Period clock = 1MHz
-    TB1CCR2 = 100;                      // CCR1 PWM duty cycle, PWM Period clock = 1MHz
-    TB1CTL = TBSSEL_1 + MC_2;            //set up  timer B in up count mode with ACLK as source
-
-    //Configure Duty cycle (A1 and A2)
+    //Configure Output (A1 and A2)
     P1DIR |= BIT4 + BIT5;                       // P1.4, 1.5 output
-    P1SEL0 |= BIT4 + BIT5;                      // P1.4, 1.5 options select
-    TB0CCTL1 = OUTMOD_7;                 // CCR1 reset/set
-    TB0CCTL2 = OUTMOD_7;                 // CCR2 reset/set
-    TB0CCR1 = 100;                      // CCR1 PWM duty cycle, PWM Period clock = 1MHz
-    TB0CCR2 = 100;                      // CCR1 PWM duty cycle, PWM Period clock = 1MHz
-    TB0CTL = TBSSEL_1 + MC_2;            //set up  timer B in up count mode with ACLK as source
+    //Configure Output (B1 and B2)
+    P3DIR |= BIT4 + BIT5;                       // P1.4, 1.5 output
 
     while(1){
         while(queue[last] != 255 && currSize > 0){
@@ -64,7 +84,7 @@ int main(void)
                 last += 1;
             }
         }
-        while(currSize < 5);
+        while(currSize < 6);
         queue[last] = NULL;
         currSize -= 1;
         if(last == 49){
@@ -114,6 +134,16 @@ int main(void)
             last += 1;
         }
 
+        modeByte = queue[last];
+        queue[last] = NULL;
+        currSize -= 1;
+        if(last == 49){
+            last = 0;
+        }
+        else{
+            last += 1;
+        }
+
         if(escapeByte == 1){
             dataByte1 = 255;
         } else if(escapeByte == 2){
@@ -123,22 +153,38 @@ int main(void)
             dataByte2 = 255;
         }
 
-        freqInt |= dataByte2 << 8;
-        freqInt = dataByte1 << 8;
-        TB1CCR1 = freqInt;
-        TB0CCR1 = freqInt;
+        if(modeByte == 0){
+            TA0CCTL0 &= ~CCIE;
+            P1OUT = directionTableA[order];
+            P3OUT = directionTableB[order];
+            if(directionByte == 1){
+                if(order == 7){
+                    order = 0;
+                } else{
+                    order++;
+                }
+            } else{
+                if(order == 0){
+                    order = 7;
+                } else{
+                    order--;
+                }
+            }
 
-
+        } else if(modeByte == 1){
+            TA0CCTL0 |= CCIE;
+            TA0CCR0 = (dataByte1 << 8) + dataByte2;
+        }
     }
 
     return 0;
 }
 
-#pragma vector = USCI_A0_VECTOR
-__interrupt void USCI_A0_ISR(void)
+#pragma vector = USCI_A1_VECTOR
+__interrupt void USCI_A1_ISR(void)
 {
     unsigned char RxByte = 0;
-    RxByte = UCA0RXBUF;
+    RxByte = UCA1RXBUF;
 
     if(currSize < queueSize){
         queue[curr] = RxByte;
@@ -151,4 +197,24 @@ __interrupt void USCI_A0_ISR(void)
     }
 
     __no_operation();
+}
+
+#pragma vector = TIMER0_A0_VECTOR
+__interrupt void TIMER0_ISR(void)
+{
+    if(directionByte == 1){
+        if(order == 7){
+            order = 0;
+        } else{
+            order++;
+        }
+    } else{
+        if(order == 0){
+            order = 7;
+        } else{
+            order--;
+        }
+    }
+    P1OUT = directionTableA[order];
+    P3OUT = directionTableB[order];
 }

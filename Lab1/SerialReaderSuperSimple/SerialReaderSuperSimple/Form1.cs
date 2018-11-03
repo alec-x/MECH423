@@ -84,7 +84,7 @@ namespace SerialReaderSuperSimple
             {
                 serialReadQueue.TryDequeue(out firstByte);
             }
-            while(serialReadQueue.Count >= 4 && firstByte == 255)
+            while(serialReadQueue.Count >= 6 && firstByte == 255)
             {
                 serialReadQueue.TryDequeue(out xByte);
                 serialReadQueue.TryDequeue(out yByte);

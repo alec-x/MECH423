@@ -12,7 +12,7 @@ namespace lab3_2
 {
     public partial class Form1 : Form
     {
-        byte[] TxBytes = new Byte[5];
+        byte[] TxBytes = new Byte[6];
         public Form1()
         {
             InitializeComponent();
@@ -63,7 +63,7 @@ namespace lab3_2
 
         private void directionText_TextChanged(object sender, EventArgs e)
         {
-            if (System.Text.RegularExpressions.Regex.IsMatch(directionText.Text, "[^0-1]"))
+            if (System.Text.RegularExpressions.Regex.IsMatch(directionText.Text, "[^0-1]") || directionText.TextLength > 1)
             {
                 Console.WriteLine("Please enter only binary.");
                 directionText.Text = directionText.Text.Remove(directionText.Text.Length - 1);
@@ -72,10 +72,19 @@ namespace lab3_2
 
         private void escapeText_TextChanged(object sender, EventArgs e)
         {
-            if (System.Text.RegularExpressions.Regex.IsMatch(escapeText.Text, "[^0-9]"))
+            if (System.Text.RegularExpressions.Regex.IsMatch(escapeText.Text, "[^0-2]") || escapeText.TextLength > 1)
             {
                 Console.WriteLine("Please enter only numbers.");
                 escapeText.Text = escapeText.Text.Remove(escapeText.Text.Length - 1);
+            }
+        }
+
+        private void modeText_TextChanged(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(modeText.Text, "[^0-1]") || modeText.TextLength > 1)
+            {
+                Console.WriteLine("Please enter only binary.");
+                modeText.Text = modeText.Text.Remove(modeText.Text.Length - 1);
             }
         }
     }

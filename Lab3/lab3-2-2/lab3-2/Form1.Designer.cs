@@ -45,12 +45,15 @@
             this.escapeText = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.serialPort = new System.IO.Ports.SerialPort(this.components);
+            this.modeText = new System.Windows.Forms.TextBox();
+            this.modeLabel = new System.Windows.Forms.Label();
+            this.part3Check = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // connectButton
             // 
             this.connectButton.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.connectButton.Location = new System.Drawing.Point(424, 12);
+            this.connectButton.Location = new System.Drawing.Point(427, 12);
             this.connectButton.Name = "connectButton";
             this.connectButton.Size = new System.Drawing.Size(167, 34);
             this.connectButton.TabIndex = 1;
@@ -103,7 +106,7 @@
             // baudRateText
             // 
             this.baudRateText.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.baudRateText.Location = new System.Drawing.Point(278, 13);
+            this.baudRateText.Location = new System.Drawing.Point(281, 13);
             this.baudRateText.Name = "baudRateText";
             this.baudRateText.Size = new System.Drawing.Size(131, 32);
             this.baudRateText.TabIndex = 6;
@@ -113,7 +116,7 @@
             // 
             this.baudRateLabel.AutoSize = true;
             this.baudRateLabel.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.baudRateLabel.Location = new System.Drawing.Point(139, 16);
+            this.baudRateLabel.Location = new System.Drawing.Point(141, 16);
             this.baudRateLabel.Name = "baudRateLabel";
             this.baudRateLabel.Size = new System.Drawing.Size(125, 26);
             this.baudRateLabel.TabIndex = 7;
@@ -122,17 +125,18 @@
             // duty1Text
             // 
             this.duty1Text.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.duty1Text.Location = new System.Drawing.Point(214, 86);
+            this.duty1Text.Location = new System.Drawing.Point(216, 86);
             this.duty1Text.Name = "duty1Text";
             this.duty1Text.Size = new System.Drawing.Size(196, 32);
             this.duty1Text.TabIndex = 9;
+            this.duty1Text.Text = "0";
             this.duty1Text.TextChanged += new System.EventHandler(this.duty1Text_TextChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(209, 55);
+            this.label1.Location = new System.Drawing.Point(211, 55);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(194, 26);
             this.label1.TabIndex = 8;
@@ -141,17 +145,18 @@
             // duty2Text
             // 
             this.duty2Text.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.duty2Text.Location = new System.Drawing.Point(416, 86);
+            this.duty2Text.Location = new System.Drawing.Point(418, 86);
             this.duty2Text.Name = "duty2Text";
             this.duty2Text.Size = new System.Drawing.Size(196, 32);
             this.duty2Text.TabIndex = 11;
+            this.duty2Text.Text = "0";
             this.duty2Text.TextChanged += new System.EventHandler(this.duty2Text_TextChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(411, 55);
+            this.label2.Location = new System.Drawing.Point(413, 55);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(194, 26);
             this.label2.TabIndex = 10;
@@ -160,17 +165,18 @@
             // directionText
             // 
             this.directionText.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.directionText.Location = new System.Drawing.Point(618, 86);
+            this.directionText.Location = new System.Drawing.Point(620, 86);
             this.directionText.Name = "directionText";
             this.directionText.Size = new System.Drawing.Size(196, 32);
             this.directionText.TabIndex = 13;
+            this.directionText.Text = "0";
             this.directionText.TextChanged += new System.EventHandler(this.directionText_TextChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(613, 55);
+            this.label3.Location = new System.Drawing.Point(615, 55);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(156, 26);
             this.label3.TabIndex = 12;
@@ -179,27 +185,62 @@
             // escapeText
             // 
             this.escapeText.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.escapeText.Location = new System.Drawing.Point(820, 86);
+            this.escapeText.Location = new System.Drawing.Point(822, 86);
             this.escapeText.Name = "escapeText";
             this.escapeText.Size = new System.Drawing.Size(196, 32);
             this.escapeText.TabIndex = 15;
+            this.escapeText.Text = "0";
             this.escapeText.TextChanged += new System.EventHandler(this.escapeText_TextChanged);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(815, 55);
+            this.label4.Location = new System.Drawing.Point(817, 55);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(134, 26);
             this.label4.TabIndex = 14;
             this.label4.Text = "Escape Byte";
+            // 
+            // modeText
+            // 
+            this.modeText.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.modeText.Location = new System.Drawing.Point(214, 157);
+            this.modeText.Name = "modeText";
+            this.modeText.Size = new System.Drawing.Size(196, 32);
+            this.modeText.TabIndex = 17;
+            this.modeText.Text = "0";
+            this.modeText.TextChanged += new System.EventHandler(this.modeText_TextChanged);
+            // 
+            // modeLabel
+            // 
+            this.modeLabel.AutoSize = true;
+            this.modeLabel.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.modeLabel.Location = new System.Drawing.Point(209, 126);
+            this.modeLabel.Name = "modeLabel";
+            this.modeLabel.Size = new System.Drawing.Size(118, 26);
+            this.modeLabel.TabIndex = 16;
+            this.modeLabel.Text = "Mode Byte";
+            // 
+            // part3Check
+            // 
+            this.part3Check.AutoSize = true;
+            this.part3Check.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F);
+            this.part3Check.Location = new System.Drawing.Point(427, 160);
+            this.part3Check.Name = "part3Check";
+            this.part3Check.Size = new System.Drawing.Size(215, 30);
+            this.part3Check.TabIndex = 18;
+            this.part3Check.Text = "Lab 3-3 (Stepper)";
+            this.part3Check.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1027, 209);
+            this.Controls.Add(this.part3Check);
+            this.Controls.Add(this.modeText);
+            this.Controls.Add(this.modeLabel);
             this.Controls.Add(this.escapeText);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.directionText);
@@ -240,6 +281,9 @@
         private System.Windows.Forms.Button connectButton;
         private System.Windows.Forms.TextBox directionText;
         private System.IO.Ports.SerialPort serialPort;
+        private System.Windows.Forms.TextBox modeText;
+        private System.Windows.Forms.Label modeLabel;
+        private System.Windows.Forms.CheckBox part3Check;
     }
 }
 
