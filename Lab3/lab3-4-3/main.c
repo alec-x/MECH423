@@ -26,6 +26,7 @@ int main(void)
     UCA1IE |= UCRXIE;
 
     // Set P1.1 and 1.2 as input
+    //P1SEL0 = 0
     P1DIR &= ~(BIT1 + BIT2);
     P1SEL1 |= BIT1 + BIT2;
 
@@ -88,6 +89,6 @@ __interrupt void TIMER0_ISR(void)
     while(!(UCA1IFG & UCTXIFG)); //if currently transmitting, then loop on itself
     UCA1TXBUF = escapeByte;
 
-    TA0CTL = TACLR;
-    TA1CTL = TACLR;
+    TA0R = 0;
+    TA1R = 0;
 }
