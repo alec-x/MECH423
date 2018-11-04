@@ -78,6 +78,10 @@ namespace lab3_4_4
             readSerial();
         }
 
+        private void commandButton_Click(object sender, EventArgs e)
+        {
+            sendBytes();
+        }
     }
 
 }

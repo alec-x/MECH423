@@ -46,6 +46,10 @@
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.speedHzText = new System.Windows.Forms.TextBox();
             this.speedHzLabel = new System.Windows.Forms.Label();
+            this.pwmText = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.directionCheck = new System.Windows.Forms.CheckBox();
+            this.commandButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.speedChart)).BeginInit();
             this.SuspendLayout();
             // 
@@ -94,7 +98,7 @@
             // 
             this.speedRPMLabel.AutoSize = true;
             this.speedRPMLabel.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F);
-            this.speedRPMLabel.Location = new System.Drawing.Point(554, 137);
+            this.speedRPMLabel.Location = new System.Drawing.Point(554, 142);
             this.speedRPMLabel.Name = "speedRPMLabel";
             this.speedRPMLabel.Size = new System.Drawing.Size(230, 26);
             this.speedRPMLabel.TabIndex = 2;
@@ -152,7 +156,7 @@
             // speedRPMText
             // 
             this.speedRPMText.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.speedRPMText.Location = new System.Drawing.Point(559, 166);
+            this.speedRPMText.Location = new System.Drawing.Point(559, 171);
             this.speedRPMText.Name = "speedRPMText";
             this.speedRPMText.Size = new System.Drawing.Size(183, 32);
             this.speedRPMText.TabIndex = 13;
@@ -181,11 +185,55 @@
             this.speedHzLabel.TabIndex = 14;
             this.speedHzLabel.Text = "Encoder Speed (Hz)";
             // 
+            // pwmText
+            // 
+            this.pwmText.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pwmText.Location = new System.Drawing.Point(921, 187);
+            this.pwmText.Name = "pwmText";
+            this.pwmText.Size = new System.Drawing.Size(183, 32);
+            this.pwmText.TabIndex = 18;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F);
+            this.label3.Location = new System.Drawing.Point(916, 157);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(99, 26);
+            this.label3.TabIndex = 16;
+            this.label3.Text = "PWM %:";
+            // 
+            // directionCheck
+            // 
+            this.directionCheck.AutoSize = true;
+            this.directionCheck.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F);
+            this.directionCheck.Location = new System.Drawing.Point(921, 234);
+            this.directionCheck.Name = "directionCheck";
+            this.directionCheck.Size = new System.Drawing.Size(213, 30);
+            this.directionCheck.TabIndex = 22;
+            this.directionCheck.Text = "Reverse Direction";
+            this.directionCheck.UseVisualStyleBackColor = true;
+            // 
+            // commandButton
+            // 
+            this.commandButton.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.commandButton.Location = new System.Drawing.Point(921, 270);
+            this.commandButton.Name = "commandButton";
+            this.commandButton.Size = new System.Drawing.Size(213, 34);
+            this.commandButton.TabIndex = 23;
+            this.commandButton.Text = "Send Command";
+            this.commandButton.UseVisualStyleBackColor = true;
+            this.commandButton.Click += new System.EventHandler(this.commandButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 476);
+            this.ClientSize = new System.Drawing.Size(1337, 476);
+            this.Controls.Add(this.commandButton);
+            this.Controls.Add(this.directionCheck);
+            this.Controls.Add(this.pwmText);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.speedHzText);
             this.Controls.Add(this.speedHzLabel);
             this.Controls.Add(this.speedRPMText);
@@ -222,6 +270,10 @@
         private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.TextBox speedHzText;
         private System.Windows.Forms.Label speedHzLabel;
+        private System.Windows.Forms.TextBox pwmText;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.CheckBox directionCheck;
+        private System.Windows.Forms.Button commandButton;
     }
 }
 

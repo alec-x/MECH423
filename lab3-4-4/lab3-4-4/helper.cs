@@ -134,33 +134,90 @@ namespace lab3_4_4
                 }
                 averagePos.Add(encoderUp - encoderDown);
                 totalPos += (Int32)encoderUp - (Int32)encoderDown;
-                if(totalPos >= 400)
+                
+                if(totalPos >= 360)
                 {
-                    totalPos = totalPos % 400;
+                    totalPos = totalPos % 360;
                 }
                 if(totalPos < 0)
                 {
-                    totalPos = totalPos % 400;
+                    totalPos = totalPos % 360;
                 }
+                
                 //chart1.Series[0].Points.DataBindY(averagePos);
             }
         }
 
-        private void updateSpeed()
+        private void sendBytes()
         {
-            // 1000 for ms to s, 400 for window count to rotation
             try
             {
-                // 60sec/min * 1000ms/s / 400count/rotation / 6datapoints-averaged = 25 
-                double currVelocity = 25 * (double)averagePos.GetRange(94, 6).Sum() / timeCounter ;
+                byte[] TxBytes = new byte[5];
+                double pwmConverted;
+                byte dataByte1, dataByte2;
+                if (pwmText.Text != "")
+                {
+                    pwmConverted = Convert.ToDouble(pwmText.Text) /100 * 255 * 255;
+                    dataByte1 = Convert.ToByte((int)pwmConverted >> 8);
+                    dataByte2 = Convert.ToByte((int)pwmConverted % 255);
+
+                    TxBytes[0] = Convert.ToByte(255);
+                    TxBytes[1] = dataByte1;
+                    TxBytes[2] = dataByte2;
+                    if (directionCheck.Checked)
+                    {
+                        TxBytes[3] = Convert.ToByte(0);
+                    }
+                    else
+                    {
+                        TxBytes[3] = Convert.ToByte(1);
+                    }
+                    if (dataByte1 == 255)
+                    {
+                        TxBytes[4] = Convert.ToByte(1);
+                        TxBytes[1] = Convert.ToByte(254);
+                    }
+                    else if (dataByte2 == 255)
+                    {
+                        TxBytes[4] = Convert.ToByte(2);
+                        TxBytes[2] = Convert.ToByte(254);
+                    } else if (dataByte1 == 255 && dataByte2 == 255)
+                    {
+                        TxBytes[4] = Convert.ToByte(3);
+                        TxBytes[2] = Convert.ToByte(254);
+                        TxBytes[1] = Convert.ToByte(254);
+                    }
+
+                }
+
+                for (int i = 0; i < 5; i++)
+                {
+                    serialPort.Write(TxBytes, i, 1);
+                }
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine("Could not send bytes");
+                Console.WriteLine(exception.Message);
+            }
+
+        }
+
+        private void updateSpeed()
+        {
+            // 1000 for ms to s, 360 for window count to rotation
+            try
+            {
+                // 60sec/min * 1000ms/s / 360count/rotation / 6datapoints-averaged = 25 (missing factor of 2?)
+                double currVelocity = 27.78 * 2 * (double)averagePos.GetRange(94, 6).Sum() / timeCounter ;
                 while (velocity.Count >= 100)
                 {
                     velocity.RemoveAt(0);
                 }
                 velocity.Add(currVelocity);
-                speedRPMText.Text = currVelocity.ToString();
-                //  / 60 * 2 * 3.1416 for RPM to rad
-                speedHzText.Text = (0.10472*currVelocity).ToString();
+                speedRPMText.Text = (velocity.GetRange(90,10).Sum() / 10).ToString();
+                //  60 / 2 / 3.1416 for RPM to rad
+                speedHzText.Text = (9.549*currVelocity).ToString();
                 positionText.Text = totalPos.ToString();
             }
             catch

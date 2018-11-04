@@ -47,7 +47,7 @@ int main(void)
     //Configure timer interrupt
     TB1CTL = TBSSEL_1 + MC_1 + ID_3;      // use ACLKC
     TB1CCTL0 = CCIE;               // count to TA0CCR0, enable interrupt
-    TB1CCR0 = 50000;               // PWM Period clock = 8MHz, desired freq 25Hz, factor 40000 * 8 (in TA0CTL)
+    TB1CCR0 = 10000;               // PWM Period clock = 8MHz, desired freq 25Hz, factor 40000 * 8 (in TA0CTL)
 
     //Configure Duty cycle (A1 and A2)
     P1DIR |= BIT4 + BIT5;                       // P1.4, 1.5 output
@@ -126,9 +126,9 @@ int main(void)
 
         if(escapeByte2 == 1){
             dataByte1 = 255;
-        } else if(escapeByte == 2){
+        } else if(escapeByte2 == 2){
             dataByte2 = 255;
-        } else if(escapeByte ==3){
+        } else if(escapeByte2 ==3){
             dataByte1 = 255;
             dataByte2 = 255;
         }

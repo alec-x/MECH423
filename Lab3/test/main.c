@@ -1,163 +1,219 @@
 #include <msp430.h>
-
+#include <stdio.h>
 
 /**
  * main.c
  */
-volatile unsigned char circBuf[5];
-volatile unsigned int start = 0;
-volatile unsigned int end = 0;
-volatile unsigned int mergedNum = 40000;
-unsigned int mode = 2; //
-unsigned int ADC_Result;
-unsigned int i;
-unsigned int freq;
 
-void setup(void);
-void setFreq(void);
-void restoreDataBytes(void);
+// Constants from motor driving
+
+const int queueSize = 50;
+volatile unsigned int currSize = 0;
+volatile unsigned int last = 0;
+volatile unsigned int curr = 0;
+char queue[50];
+unsigned int freqInt;
+char dataByte1, dataByte2, directionByte, escapeByte;
+
+//Constants from encoder reading
+volatile unsigned int upCount = 0;
+volatile unsigned int downCount = 0;
+volatile unsigned char escapeByteEncoder = 0;
+volatile unsigned char up1 = 0;
+volatile unsigned char up0 = 0;
+volatile unsigned char down1 = 0;
+volatile unsigned char down0 = 0;
 
 int main(void)
 {
     WDTCTL = WDTPW | WDTHOLD;   // stop watchdog timer
-
-    setup();
-
-    UCA1IE |= UCRXIE;                         // enable RX interrupt
-    __enable_interrupt();                     // Enable interrupt
-
-    unsigned volatile int a = 0x61;
-
-    while(1){
-        mode = circBuf[1];
-
-        if(end == 5){
-            mergedNum = (circBuf[2]<<8)|circBuf[3];
-            circBuf[2] = 0;
-            circBuf[3] = 0;
-            end = 0;
-        }
-    }
-}
-
-/**
- * set up UART, PWM and ADC
- */
-void setup(void){
-    //Outputs SMCLK on PJ.0, MCLK on PJ.1, and ACLK on PJ.2
-//    PJDIR |= BIT0 + BIT1 + BIT2;
-//    PJSEL0 |= BIT0 + BIT1 + BIT2 + BIT4 + BIT5;
-
     CSCTL0_H = 0xA5;
-    CSCTL1 &= ~DCORSEL;
-    CSCTL1 |= DCOFSEL0 + DCOFSEL1; //Set Max DCO settings = 8 MHz 363800 Hz
-    CSCTL2 |= SELA_3 + SELS_3 + SELM_3; // set XT1 as source for ACLK, SMCLK, MCLK
-    CSCTL3 |= DIVA_0 + DIVS_3 + DIVM_0; // 8 MHz -> 1 MHz
-    CSCTL4 |= XT1DRIVE_3 + XTS;
-    CSCTL4 &= ~XT1OFF;
+    CSCTL1 = DCOFSEL0 + DCOFSEL1;
+    CSCTL2 = SELA_3 + SELS_3 + SELM_3;
 
-    // Configure UART pins P2.5 --> UCA1TXD; P2.6 UCA1RXD
-    P2SEL0 &= ~(BIT5+BIT6);
+    //Configure ports to be UART
+    P2SEL0 &= ~(BIT5 + BIT6);
     P2SEL1 |= BIT5 + BIT6;
-    // Configure UART 1
-    UCA1CTL1 |= UCSWRST + UCRXEIE + UCBRKIE;
 
-    UCA1CTL1 |= UCSSEL_2; // Select ACLK as UCBRCLK
-    UCA1BR0 |= 6;
-    UCA1MCTLW |= 0x2000 + UCBRF_8 + UCOS16;
-    UCA1IE |= UCRXIE; // Enable RX interrupt
+    //Configure UART 1
+    UCA1CTLW0 = UCSSEL0; // clock for UART comes from ACLK, also UART is enabled
+    UCA1MCTLW = 0x4900 + UCOS16 + UCBRF0; //4900 F700
+    UCA1BRW = 52;
+    UCA1IE |= UCRXIE;
+	
+    // Set P1.1 and 1.2 as input to receive encoder
+    //P1SEL0 = 0
+    P1DIR &= ~(BIT1 + BIT2);
+    P1SEL1 |= BIT1 + BIT2;
 
-    // Configure pins for PWM
-    P1DIR |= BIT4 + BIT5; // output
-    P1SEL0 |= BIT4 + BIT5; // option select
-    P1SEL1 &= ~(BIT4 + BIT5); // option select
+    //Configure timer A interrupt to receive encoder
+    TA1CTL |= MC1; //cts mode (reads encoder)
+    TA0CTL |= MC1;
+    
+	//Configure timer B interrupt to send encoder reads
+    TB1CTL = TBSSEL_1 + MC_1 + ID_3;      // use ACLKC
+    TB1CCTL0 = CCIE;               // count to TA0CCR0, enable interrupt
+    TB1CCR0 = 40000;               // PWM Period clock = 1MHz, desired freq 25Hz, factor 40000 ( /8in TA0CTL)
+	
+    //Configure Duty cycle (A1 and A2 motor H-bridge output)
+    P1DIR |= BIT4 + BIT5;                       // P1.4, 1.5 output
+    P1SEL0 |= BIT4 + BIT5;                      // P1.4, 1.5 options select
+    TB0CCTL1 = OUTMOD_7;                 // CCR1 reset/set
+    TB0CCTL2 = OUTMOD_7;                 // CCR2 reset/set
+    TB0CCR1 = 15000;                      // CCR1 PWM duty cycle, PWM Period clock = 8MHz
+    TB0CCR2 = 100;                      // CCR1 PWM duty cycle, PWM Period clock = 8MHz
+    TB0CTL = TBSSEL_1 + MC_2;            //set up  timer B in up count mode with ACLK as source
 
-    // Timer B
-    TB0CCTL1 = OUTMOD_7;
-    TB0CCR1 = 60000;
-    TB0CCTL2 = OUTMOD_5;
-    TB0CCR2 = 60000;
-    TB0CTL |= TBSSEL_1 + MC_2 + TBCLR;   // ACLK; continuous; clear TAR
+	_EINT(); //global interrupt enable
+    while(1){
+        while(queue[last] != 255 && currSize > 0){
+            queue[last] = NULL;
+            currSize -= 1;
 
-//    TB0CTL |= TBSSEL_2 + MC_2 + ID_3 + TBCLR;   // Select SMCLK as source;
+            if(last == 49){
+                last = 0;
+            }
+            else{
+                last += 1;
+            }
+        }
+        while(currSize < 5);
+        queue[last] = NULL;
+        currSize -= 1;
+        if(last == 49){
+            last = 0;
+        }
+        else{
+            last += 1;
+        }
 
-    // Configure ADC
-    P3SEL1 &= ~BIT0;
-    P3SEL0 |= BIT0;
+        dataByte1 = queue[last];
+        queue[last] = NULL;
+        currSize -= 1;
+        if(last == 49){
+            last = 0;
+        }
+        else{
+            last += 1;
+        }
 
-//    ADC10CTL0 |= ADC10SHT_2 + ADC10ON + ADC10MSC;        // ADC10ON, S&H=16 ADC clks
-//    ADC10CTL1 |= ADC10SHP + ADC10SSEL_2;                    // ADCCLK = MCLK; sampling timer
-//    ADC10CTL1 |= ADC10CONSEQ_2; // repeated single channel
-//    ADC10CTL2 |= ADC10RES;                    // 10-bit conversion results
-//    ADC10MCTL0 |= ADC10INCH_12;                // A12 ADC input select; Vref=AVCC
-//    ADC10IE |= ADC10IE0;                      // Enable ADC conv complete interrupt
+        dataByte2 = queue[last];
+        queue[last] = NULL;
+        currSize -= 1;
+        if(last == 49){
+            last = 0;
+        }
+        else{
+            last += 1;
+        }
 
-    UCA1CTL1 &= ~UCSWRST;                     // release from reset
-}
+        directionByte = queue[last];
+        queue[last] = NULL;
+        currSize -= 1;
+        if(last == 49){
+            last = 0;
+        }
+        else{
+            last += 1;
+        }
 
-void restoreDataBytes(void){
-    if((circBuf[4] & BIT0) == BIT0)
-        circBuf[3] = 255;
-    if((circBuf[4] & BIT1) == BIT1)
-        circBuf[2] = 255;
-}
+        escapeByte = queue[last];
+        queue[last] = NULL;
+        currSize -= 1;
+        if(last == 49){
+            last = 0;
+        }
+        else{
+            last += 1;
+        }
 
-void setFreq(void){
-    switch(mode){
-    case 0: TB0CCTL1 = OUTMOD_7;
-            TB0CCTL2 = OUTMOD_5;
-            TB0CCR1 = freq*256;
-            TB0CCR2 = freq*256;
-            break;
-    case 1: TB0CCTL1 = OUTMOD_5;
-            TB0CCTL2 = OUTMOD_7;
-            TB0CCR1 = freq*256;
-            TB0CCR2 = freq*256;
-            break;
+        if(escapeByte == 1){
+            dataByte1 = 255;
+        } else if(escapeByte == 2){
+            dataByte2 = 255;
+        } else if(escapeByte ==3){
+            dataByte1 = 255;
+            dataByte2 = 255;
+        }
 
-    case 2: TB0CCTL1 = OUTMOD_7;
-            TB0CCTL2 = OUTMOD_5;
-            TB0CCR1 = ADC_Result * 64;
-            TB0CCR2 = ADC_Result * 64;
-            break;
-    case 3: TB0CCTL1 = OUTMOD_5;
-            TB0CCTL2 = OUTMOD_7;
-            TB0CCR1 = ADC_Result * 64;
-            TB0CCR2 = ADC_Result * 64;
-            break;
-    default: break;
+        freqInt = (dataByte1 << 8) + dataByte2;
+        TB0CCR2 = freqInt;
+        TB0CCR1 = freqInt;
+
+        if(directionByte){
+            TB0CCR1 = 0;
+        }
+        else{
+            TB0CCR2 = 0;
+        }
+
     }
+
+    return 0;
 }
 
 #pragma vector = USCI_A1_VECTOR
-__interrupt void USCI_A1_ISR(void){
-    circBuf[end] = UCA1RXBUF;       // Vector 2 - RXIFG
-    UCA1TXBUF = circBuf[end];
-    end++;
-    if (end == 5){
-        end = 0;
-        restoreDataBytes();
+__interrupt void USCI_A1_ISR(void)
+{
+    unsigned char RxByte = 0;
+    RxByte = UCA1RXBUF;
+
+    if(currSize < queueSize){
+        queue[curr] = RxByte;
+        if(curr == 49){
+            curr = 0;
+        }else{
+            curr++;
+        }
+        currSize += 1;
     }
-    mode = circBuf[1];
-    freq = circBuf[2];
-    setFreq();
-    UCA1IV &= ~UCRXIFG;
+
+    __no_operation();
 }
 
-// ADC10 interrupt service routine
-#pragma vector=ADC10_VECTOR
-__interrupt void ADC10_ISR(void){
-    switch(__even_in_range(ADC10IV,12))
-    {
-    case  0: break;                          // No interrupt
-    case  2: break;                          // conversion result overflow
-    case  4: break;                          // conversion time overflow
-    case  6: break;                          // ADC10HI
-    case  8: break;                          // ADC10LO
-    case 10: break;                          // ADC10IN
-    case 12: ADC_Result = ADC10MEM0;
-             setFreq();
-             break;                          // Clear CPUOFF bit from 0(SR)
-    default: break;
+#pragma vector = TIMER1_B0_VECTOR
+__interrupt void TIMER1_ISR(void)
+{
+
+	// 255, UP1, UP0, DOWN1, DOWN0, ESCAPE
+    // where 1 is most sig, 0 is least
+    upCount = TA0R;
+    downCount = TA1R;
+    up1 = upCount >> 8;
+    up0 = upCount;
+    down1 = downCount >> 8;
+    down0 = downCount;
+    escapeByteEncoder = 0;
+    if(up1==255){
+        escapeByteEncoder += 1;
+        up1 = 0;
     }
+    if(up0==255){
+        escapeByteEncoder += 2;
+        up0 = 0;
+    }
+    if(down1==255){
+        escapeByteEncoder += 4;
+        down1 = 0;
+    }
+    if(down0==255){
+        escapeByteEncoder += 8;
+        down0 = 0;
+    }
+
+    while(!(UCA1IFG & UCTXIFG)); //if currently transmitting, then loop on itself
+    UCA1TXBUF = 255;
+    while(!(UCA1IFG & UCTXIFG)); //if currently transmitting, then loop on itself
+    UCA1TXBUF = up1;
+    while(!(UCA1IFG & UCTXIFG)); //if currently transmitting, then loop on itself
+    UCA1TXBUF = up0;
+    while(!(UCA1IFG & UCTXIFG)); //if currently transmitting, then loop on itself
+    UCA1TXBUF = down1;
+    while(!(UCA1IFG & UCTXIFG)); //if currently transmitting, then loop on itself
+    UCA1TXBUF = down0;
+    while(!(UCA1IFG & UCTXIFG)); //if currently transmitting, then loop on itself
+    UCA1TXBUF = escapeByteEncoder;
+    TA0R = 0;
+    TA1R = 0;
+
 }
