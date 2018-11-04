@@ -53,7 +53,7 @@ int main(void)
 	//Configure timer B interrupt to send encoder reads
     TB1CTL = TBSSEL_1 + MC_1 + ID_3;      // use ACLKC
     TB1CCTL0 = CCIE;               // count to TA0CCR0, enable interrupt
-    TB1CCR0 = 40000;               // PWM Period clock = 1MHz, desired freq 25Hz, factor 40000 ( /8in TA0CTL)
+    TB1CCR0 = 30000;               // PWM Period clock = 1MHz, desired freq 25Hz, factor 40000 ( /8in TA0CTL)
 	
     //Configure Duty cycle (A1 and A2 motor H-bridge output)
     P1DIR |= BIT4 + BIT5;                       // P1.4, 1.5 output

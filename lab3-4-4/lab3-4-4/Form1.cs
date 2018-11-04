@@ -14,7 +14,9 @@ namespace lab3_4_4
     public partial class Form1 : Form
     {
         long timeCounter = 0; //use stopwatch?
+        double currVelocity = 0;
         Int32 totalPos = 0;
+        double pwmConverted;
         Stopwatch stopWatch;
         ConcurrentQueue<int> dataBuffer = new ConcurrentQueue<int>();
         List<int> averagePos = new List<int>(); //100 points long
@@ -80,7 +82,29 @@ namespace lab3_4_4
 
         private void commandButton_Click(object sender, EventArgs e)
         {
-            sendBytes();
+            if (pwmText.Text != "")
+            {
+                sendBytes(Convert.ToDouble(pwmText.Text));
+            }
+                
+        }
+
+        private void positionModCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            speedModCheck.Checked = false;
+        }
+
+        private void speedModCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            positionModCheck.Checked = false;
+        }
+
+        private void feedbackTimer_Tick(object sender, EventArgs e)
+        {
+            if (speedModCheck.Checked)
+            {
+                modulateSpeed();
+            }
         }
     }
 

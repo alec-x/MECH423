@@ -148,16 +148,15 @@ namespace lab3_4_4
             }
         }
 
-        private void sendBytes()
+        void sendBytes(double pwmPercentage)
         {
             try
             {
                 byte[] TxBytes = new byte[5];
-                double pwmConverted;
+                
                 byte dataByte1, dataByte2;
-                if (pwmText.Text != "")
-                {
-                    pwmConverted = Convert.ToDouble(pwmText.Text) /100 * 255 * 255;
+
+                    pwmConverted = pwmPercentage /100 * 255 * 255;
                     dataByte1 = Convert.ToByte((int)pwmConverted >> 8);
                     dataByte2 = Convert.ToByte((int)pwmConverted % 255);
 
@@ -187,9 +186,6 @@ namespace lab3_4_4
                         TxBytes[2] = Convert.ToByte(254);
                         TxBytes[1] = Convert.ToByte(254);
                     }
-
-                }
-
                 for (int i = 0; i < 5; i++)
                 {
                     serialPort.Write(TxBytes, i, 1);
@@ -209,7 +205,7 @@ namespace lab3_4_4
             try
             {
                 // 60sec/min * 1000ms/s / 360count/rotation / 6datapoints-averaged = 25 (missing factor of 2?)
-                double currVelocity = 27.78 * 2 * (double)averagePos.GetRange(94, 6).Sum() / timeCounter ;
+                currVelocity = 27.78 * 2 * (double)averagePos.GetRange(94, 6).Sum() / timeCounter ;
                 while (velocity.Count >= 100)
                 {
                     velocity.RemoveAt(0);
@@ -217,13 +213,34 @@ namespace lab3_4_4
                 velocity.Add(currVelocity);
                 speedRPMText.Text = (velocity.GetRange(90,10).Sum() / 10).ToString();
                 //  60 / 2 / 3.1416 for RPM to rad
-                speedHzText.Text = (9.549*currVelocity).ToString();
+                speedHzText.Text = (9.549* (velocity.GetRange(90, 10).Sum() / 10)).ToString();
                 positionText.Text = totalPos.ToString();
             }
             catch
             {
                 speedRPMText.Text = "INITIALIZING";
                 positionText.Text = "INITIALIZING";
+            }
+        }
+
+        private void modulateSpeed() {
+            double gain = 1;
+            int direction = 0; 
+            try
+            {   
+                if(currVelocity >= Convert.ToInt16(posModText.Text))
+                {
+                    speedModText.Text = (currVelocity - Convert.ToInt16(posModText.Text)).ToString();
+                }
+                else
+                {
+                    speedModText.Text = (Convert.ToInt16(posModText.Text) - currVelocity).ToString();
+                }
+                                
+            }
+            catch
+            {
+                speedModText.Text = "INITIALIZING";
             }
         }
     }
