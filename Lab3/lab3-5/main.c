@@ -52,6 +52,7 @@ int main(void)
     TB1CTL = TBSSEL_1 + MC_1 + ID_3;      // use ACLKC
     TB1CCTL0 = CCIE;               // count to TA0CCR0, enable interrupt
     TB1CCR0 = 40000;               // PWM Period clock = 8MHz, desired freq 25Hz, factor 40000 * 8 (in TA0CTL)
+    TB1EX0 = TBIDEX_1;
 
     //Configure Duty cycle (A1 and A2)
     P1DIR |= BIT4 + BIT5;                       // P1.4, 1.5 output
@@ -166,8 +167,8 @@ int main(void)
 
         TA0R = 0;
         TA1R = 0;
-        static const int gain = 100;
-        static const int limit = 2500;
+        static const int gain = 50;
+        static const int limit = 4000;
         if(targetPos > absPos){
             freqInt = gain*(targetPos - absPos);
             if(freqInt >= limit){
