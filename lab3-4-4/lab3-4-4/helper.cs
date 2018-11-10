@@ -222,26 +222,5 @@ namespace lab3_4_4
                 positionText.Text = "INITIALIZING";
             }
         }
-
-        private void modulateSpeed() {
-            double gain = 1;
-            int direction = 0; 
-            try
-            {   
-                if(currVelocity >= Convert.ToInt16(posModText.Text))
-                {
-                    speedModText.Text = (currVelocity - Convert.ToInt16(posModText.Text)).ToString();
-                }
-                else
-                {
-                    speedModText.Text = (Convert.ToInt16(posModText.Text) - currVelocity).ToString();
-                }
-                                
-            }
-            catch
-            {
-                speedModText.Text = "INITIALIZING";
-            }
-        }
     }
 }

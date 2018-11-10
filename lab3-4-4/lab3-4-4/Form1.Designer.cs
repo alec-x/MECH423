@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.serialPort = new System.IO.Ports.SerialPort(this.components);
             this.speedChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.positionLabel = new System.Windows.Forms.Label();
@@ -50,11 +50,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.directionCheck = new System.Windows.Forms.CheckBox();
             this.commandButton = new System.Windows.Forms.Button();
-            this.positionModCheck = new System.Windows.Forms.CheckBox();
-            this.speedModCheck = new System.Windows.Forms.CheckBox();
-            this.feedbackTimer = new System.Windows.Forms.Timer(this.components);
-            this.speedModText = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.posModCheck = new System.Windows.Forms.CheckBox();
             this.posModText = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.speedChart)).BeginInit();
@@ -66,27 +62,27 @@
             // 
             // speedChart
             // 
-            chartArea3.AxisY.Crossing = 0D;
-            chartArea3.AxisY.IsStartedFromZero = false;
-            chartArea3.AxisY2.Crossing = 0D;
-            chartArea3.AxisY2.IsStartedFromZero = false;
-            chartArea3.Name = "ChartArea1";
-            this.speedChart.ChartAreas.Add(chartArea3);
-            legend3.DockedToChartArea = "ChartArea1";
-            legend3.Name = "Legend1";
-            this.speedChart.Legends.Add(legend3);
+            chartArea1.AxisY.Crossing = 0D;
+            chartArea1.AxisY.IsStartedFromZero = false;
+            chartArea1.AxisY2.Crossing = 0D;
+            chartArea1.AxisY2.IsStartedFromZero = false;
+            chartArea1.Name = "ChartArea1";
+            this.speedChart.ChartAreas.Add(chartArea1);
+            legend1.DockedToChartArea = "ChartArea1";
+            legend1.Name = "Legend1";
+            this.speedChart.Legends.Add(legend1);
             this.speedChart.Location = new System.Drawing.Point(12, 72);
             this.speedChart.Name = "speedChart";
-            series5.ChartArea = "ChartArea1";
-            series5.Legend = "Legend1";
-            series5.Name = "encoderPosition";
-            series6.ChartArea = "ChartArea1";
-            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series6.Legend = "Legend1";
-            series6.Name = "motorSpeed";
-            series6.YAxisType = System.Windows.Forms.DataVisualization.Charting.AxisType.Secondary;
-            this.speedChart.Series.Add(series5);
-            this.speedChart.Series.Add(series6);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "encoderChangeInPosition";
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.Legend = "Legend1";
+            series2.Name = "motorSpeed";
+            series2.YAxisType = System.Windows.Forms.DataVisualization.Charting.AxisType.Secondary;
+            this.speedChart.Series.Add(series1);
+            this.speedChart.Series.Add(series2);
             this.speedChart.Size = new System.Drawing.Size(536, 392);
             this.speedChart.TabIndex = 0;
             this.speedChart.Text = "speedChart";
@@ -97,9 +93,9 @@
             this.positionLabel.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F);
             this.positionLabel.Location = new System.Drawing.Point(554, 72);
             this.positionLabel.Name = "positionLabel";
-            this.positionLabel.Size = new System.Drawing.Size(188, 26);
+            this.positionLabel.Size = new System.Drawing.Size(297, 26);
             this.positionLabel.TabIndex = 1;
-            this.positionLabel.Text = "Encoder Position:";
+            this.positionLabel.Text = "Encoder Change in Position:";
             // 
             // speedRPMLabel
             // 
@@ -195,7 +191,7 @@
             // pwmText
             // 
             this.pwmText.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pwmText.Location = new System.Drawing.Point(921, 187);
+            this.pwmText.Location = new System.Drawing.Point(907, 72);
             this.pwmText.Name = "pwmText";
             this.pwmText.Size = new System.Drawing.Size(183, 32);
             this.pwmText.TabIndex = 18;
@@ -204,7 +200,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F);
-            this.label3.Location = new System.Drawing.Point(916, 157);
+            this.label3.Location = new System.Drawing.Point(902, 42);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(99, 26);
             this.label3.TabIndex = 16;
@@ -214,7 +210,7 @@
             // 
             this.directionCheck.AutoSize = true;
             this.directionCheck.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F);
-            this.directionCheck.Location = new System.Drawing.Point(921, 234);
+            this.directionCheck.Location = new System.Drawing.Point(906, 255);
             this.directionCheck.Name = "directionCheck";
             this.directionCheck.Size = new System.Drawing.Size(213, 30);
             this.directionCheck.TabIndex = 22;
@@ -224,7 +220,7 @@
             // commandButton
             // 
             this.commandButton.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.commandButton.Location = new System.Drawing.Point(921, 270);
+            this.commandButton.Location = new System.Drawing.Point(906, 291);
             this.commandButton.Name = "commandButton";
             this.commandButton.Size = new System.Drawing.Size(213, 34);
             this.commandButton.TabIndex = 23;
@@ -232,58 +228,21 @@
             this.commandButton.UseVisualStyleBackColor = true;
             this.commandButton.Click += new System.EventHandler(this.commandButton_Click);
             // 
-            // positionModCheck
+            // posModCheck
             // 
-            this.positionModCheck.AutoSize = true;
-            this.positionModCheck.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F);
-            this.positionModCheck.Location = new System.Drawing.Point(921, 434);
-            this.positionModCheck.Name = "positionModCheck";
-            this.positionModCheck.Size = new System.Drawing.Size(212, 30);
-            this.positionModCheck.TabIndex = 24;
-            this.positionModCheck.Text = "Modulate position";
-            this.positionModCheck.UseVisualStyleBackColor = true;
-            this.positionModCheck.CheckedChanged += new System.EventHandler(this.positionModCheck_CheckedChanged);
-            // 
-            // speedModCheck
-            // 
-            this.speedModCheck.AutoSize = true;
-            this.speedModCheck.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F);
-            this.speedModCheck.Location = new System.Drawing.Point(921, 398);
-            this.speedModCheck.Name = "speedModCheck";
-            this.speedModCheck.Size = new System.Drawing.Size(191, 30);
-            this.speedModCheck.TabIndex = 25;
-            this.speedModCheck.Text = "Modulate speed";
-            this.speedModCheck.UseVisualStyleBackColor = true;
-            this.speedModCheck.CheckedChanged += new System.EventHandler(this.speedModCheck_CheckedChanged);
-            // 
-            // feedbackTimer
-            // 
-            this.feedbackTimer.Enabled = true;
-            this.feedbackTimer.Interval = 1000;
-            this.feedbackTimer.Tick += new System.EventHandler(this.feedbackTimer_Tick);
-            // 
-            // speedModText
-            // 
-            this.speedModText.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.speedModText.Location = new System.Drawing.Point(559, 417);
-            this.speedModText.Name = "speedModText";
-            this.speedModText.Size = new System.Drawing.Size(183, 32);
-            this.speedModText.TabIndex = 27;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F);
-            this.label1.Location = new System.Drawing.Point(554, 388);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(47, 26);
-            this.label1.TabIndex = 26;
-            this.label1.Text = "Diff";
+            this.posModCheck.AutoSize = true;
+            this.posModCheck.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F);
+            this.posModCheck.Location = new System.Drawing.Point(907, 191);
+            this.posModCheck.Name = "posModCheck";
+            this.posModCheck.Size = new System.Drawing.Size(212, 30);
+            this.posModCheck.TabIndex = 25;
+            this.posModCheck.Text = "Modulate position";
+            this.posModCheck.UseVisualStyleBackColor = true;
             // 
             // posModText
             // 
             this.posModText.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.posModText.Location = new System.Drawing.Point(559, 353);
+            this.posModText.Location = new System.Drawing.Point(907, 153);
             this.posModText.Name = "posModText";
             this.posModText.Size = new System.Drawing.Size(183, 32);
             this.posModText.TabIndex = 29;
@@ -292,11 +251,11 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F);
-            this.label2.Location = new System.Drawing.Point(554, 324);
+            this.label2.Location = new System.Drawing.Point(902, 124);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(77, 26);
+            this.label2.Size = new System.Drawing.Size(172, 26);
             this.label2.TabIndex = 28;
-            this.label2.Text = "Target";
+            this.label2.Text = "Target Position:";
             // 
             // Form1
             // 
@@ -305,10 +264,7 @@
             this.ClientSize = new System.Drawing.Size(1145, 482);
             this.Controls.Add(this.posModText);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.speedModText);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.speedModCheck);
-            this.Controls.Add(this.positionModCheck);
+            this.Controls.Add(this.posModCheck);
             this.Controls.Add(this.commandButton);
             this.Controls.Add(this.directionCheck);
             this.Controls.Add(this.pwmText);
@@ -353,11 +309,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.CheckBox directionCheck;
         private System.Windows.Forms.Button commandButton;
-        private System.Windows.Forms.CheckBox positionModCheck;
-        private System.Windows.Forms.CheckBox speedModCheck;
-        private System.Windows.Forms.Timer feedbackTimer;
-        private System.Windows.Forms.TextBox speedModText;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox posModCheck;
         private System.Windows.Forms.TextBox posModText;
         private System.Windows.Forms.Label label2;
     }

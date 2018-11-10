@@ -25,7 +25,7 @@ namespace lab3_4_4
         public Form1()
         {
             InitializeComponent();
-            speedChart.Series["encoderPosition"].Points.DataBindY(averagePos);
+            speedChart.Series["encoderChangeInPosition"].Points.DataBindY(averagePos);
             speedChart.Series["motorSpeed"].Points.DataBindY(velocity);
 
         }
@@ -66,7 +66,7 @@ namespace lab3_4_4
             stopWatch.Reset();
             stopWatch.Start();
             updateSpeed();
-            speedChart.Series["encoderPosition"].Points.DataBindY(averagePos);
+            speedChart.Series["encoderChangeInPosition"].Points.DataBindY(averagePos);
             speedChart.Series["motorSpeed"].Points.DataBindY(velocity);
         }
 
@@ -82,29 +82,64 @@ namespace lab3_4_4
 
         private void commandButton_Click(object sender, EventArgs e)
         {
-            if (pwmText.Text != "")
+            if (posModCheck.Checked)
             {
-                sendBytes(Convert.ToDouble(pwmText.Text));
+                try
+                {
+                    byte[] TxBytes = new byte[5];
+
+                    byte dataByte1, dataByte2;
+
+                    dataByte1 = Convert.ToByte(Convert.ToInt16(posModText.Text) >> 8);
+                    dataByte2 = Convert.ToByte(Convert.ToInt16(posModText.Text) % 255);
+
+                    TxBytes[0] = Convert.ToByte(255);
+                    TxBytes[1] = dataByte1;
+                    TxBytes[2] = dataByte2;
+                    if (directionCheck.Checked)
+                    {
+                        TxBytes[3] = Convert.ToByte(0);
+                    }
+                    else
+                    {
+                        TxBytes[3] = Convert.ToByte(1);
+                    }
+                    if (dataByte1 == 255)
+                    {
+                        TxBytes[4] = Convert.ToByte(1);
+                        TxBytes[1] = Convert.ToByte(254);
+                    }
+                    else if (dataByte2 == 255)
+                    {
+                        TxBytes[4] = Convert.ToByte(2);
+                        TxBytes[2] = Convert.ToByte(254);
+                    }
+                    else if (dataByte1 == 255 && dataByte2 == 255)
+                    {
+                        TxBytes[4] = Convert.ToByte(3);
+                        TxBytes[2] = Convert.ToByte(254);
+                        TxBytes[1] = Convert.ToByte(254);
+                    }
+                    for (int i = 0; i < 5; i++)
+                    {
+                        serialPort.Write(TxBytes, i, 1);
+                    }
+                }
+                catch (Exception exception)
+                {
+                    Console.WriteLine("Could not send bytes");
+                    Console.WriteLine(exception.Message);
+                }
             }
+            else
+            {
+                if (pwmText.Text != "")
+                {
+                    sendBytes(Convert.ToDouble(pwmText.Text));
+                }
+            }
+
                 
-        }
-
-        private void positionModCheck_CheckedChanged(object sender, EventArgs e)
-        {
-            speedModCheck.Checked = false;
-        }
-
-        private void speedModCheck_CheckedChanged(object sender, EventArgs e)
-        {
-            positionModCheck.Checked = false;
-        }
-
-        private void feedbackTimer_Tick(object sender, EventArgs e)
-        {
-            if (speedModCheck.Checked)
-            {
-                modulateSpeed();
-            }
         }
     }
 

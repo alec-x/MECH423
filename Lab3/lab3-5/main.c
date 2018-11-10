@@ -224,9 +224,6 @@ __interrupt void TIMER1_ISR(void)
         sendFlag = 1;
     }
 
-    // 255, UP1, UP0, DOWN1, DOWN0, ESCAPE
-    // where 1 is most sig, 0 is least
-
 }
 
 #pragma vector = USCI_A1_VECTOR
