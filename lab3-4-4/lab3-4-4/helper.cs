@@ -205,7 +205,7 @@ namespace lab3_4_4
             try
             {
                 // 60sec/min * 1000ms/s / 360count/rotation / 6datapoints-averaged = 25 (missing factor of 2?)
-                currVelocity = 27.78 * 2 * (double)averagePos.GetRange(94, 6).Sum() / timeCounter ;
+                currVelocity = 6*27.78 * 2 * (double)averagePos.GetRange(94, 6).Sum() / timeCounter ;
                 while (velocity.Count >= 100)
                 {
                     velocity.RemoveAt(0);

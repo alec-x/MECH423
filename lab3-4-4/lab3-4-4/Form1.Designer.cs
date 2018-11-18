@@ -93,9 +93,9 @@
             this.positionLabel.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F);
             this.positionLabel.Location = new System.Drawing.Point(554, 72);
             this.positionLabel.Name = "positionLabel";
-            this.positionLabel.Size = new System.Drawing.Size(297, 26);
+            this.positionLabel.Size = new System.Drawing.Size(238, 26);
             this.positionLabel.TabIndex = 1;
-            this.positionLabel.Text = "Encoder Change in Position:";
+            this.positionLabel.Text = "Encoder Abs. Position:";
             // 
             // speedRPMLabel
             // 

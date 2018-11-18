@@ -67,6 +67,7 @@ int main(void)
 
 
     while(1){
+        /*
         if(queue[last] != 255 && currSize > 0){
             queue[last] = 0;
             currSize -= 1;
@@ -159,7 +160,7 @@ int main(void)
             UCA1TXBUF = escapeByte;
             sendFlag = 0;
         }
-
+*/
         upCount = TA0R;
         downCount = TA1R;
         absPos = absPos + upCount - downCount;
