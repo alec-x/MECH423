@@ -33,7 +33,21 @@ namespace SerialReaderSuperSimple
                 }
                 else
                 {
-                    SerialPort.Open();
+                    while(true)
+                    {
+                        SerialPort.Open();
+                        
+                        if(SerialPort.BytesToRead == 0)
+                        {
+                            System.Threading.Thread.Sleep(50);
+                            SerialPort.Close();
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                    
                     ButtonConnect.Text = "Disconnect";
                     Console.WriteLine(String.Format("Connected to serial port {0}", SerialPort.PortName));
                 }
@@ -42,8 +56,9 @@ namespace SerialReaderSuperSimple
             {
                 Console.WriteLine("Error connecting to port, try reselecting the port in the drop down menu");
             }
-            catch
+            catch (Exception other)
             {
+                Console.WriteLine(other);
                 Console.WriteLine("No clue what happened, not a System.IO.IOException");
             }
 
